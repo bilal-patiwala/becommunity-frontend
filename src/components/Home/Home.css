@@ -1,0 +1,51 @@
+.homepageBox {
+  margin-top: 60px;
+  width: 40%;
+}
+.home-img {
+  height: 400px;
+  width: 460px;
+}
+.title-div {
+  padding: 80px 20px;
+  /* letter-spacing: 1px; */
+}
+.joining-btn {
+  text-decoration: none;
+  color: black;
+}
+.joining-btn:hover {
+  text-decoration: none;
+  color: black;
+  display: inline;
+
+}
+.join-btn-div {
+  padding: 12px;
+  margin: 24px 0px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-text {
+  margin-right: 8px; /* Adjust the spacing between text and icon */
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .image-div {
+    display: none;
+  }
+  .title-div {
+    padding: 40px 20px;
+  }
+  .homepageBox {
+    margin-top: 40px;
+    width: 100%;
+  }
+}

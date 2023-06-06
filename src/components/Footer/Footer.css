@@ -1,0 +1,20 @@
+.footer-box{
+    margin: 18px;
+    padding: 8px;
+    /* border: 2px white solid; */
+}
+.footer-main-div{
+    display: flex-start;
+    flex-wrap: wrap;
+    /* border: 2px white solid; */
+
+  }
+@media only screen and (max-width: 768px) {
+    .footer-box{
+        width: 240px;
+    }
+    .footer-main-div{
+        display: flex-start;
+        flex-wrap: wrap;
+      }
+  }
