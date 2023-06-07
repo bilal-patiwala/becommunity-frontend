@@ -4,7 +4,8 @@
     /* border: 2px white solid; */
 }
 .footer-main-div{
-    display: flex-start;
+    display: flex;
+justify-content: space-around;
     flex-wrap: wrap;
     /* border: 2px white solid; */
 

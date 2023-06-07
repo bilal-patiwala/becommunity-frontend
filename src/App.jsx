@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Homepage from "./components/Homepage/Homepage";
+import Welcomepage from "./pages/WelcomePage/Welcomepage";
 function App() {
   return (
     <div>
       <BrowserRouter>
       <Routes>
-      <Route exact path ="/" element={<Homepage/>}/>
+      <Route exact path ="/" element={<Welcomepage/>}/>
       </Routes>
       </BrowserRouter>
     </div>
