@@ -14,7 +14,7 @@ function Home() {
           <div className="font-Inter text-white text-4xl font-semibold">Be<span className="text-[#6C63FF]">Community</span> </div>
           <div className="mt-4 text-[#DEDCDC] font-Inter text-xl">
           <span className="font-bold text-white">A Place to Connect. </span>
-         Create and join communities according to your interests. Making Communication and communities easier 
+            Create and join communities according to your interests. Making Communication and communities easier 
           </div>
           <Link className="joining-btn">
           <div className="text-black font-Inter font-medium text-md text-center rounded-full bg-[#fff] join-btn-div">
