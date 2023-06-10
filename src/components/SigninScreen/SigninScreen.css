@@ -1,0 +1,15 @@
+.brand-heading {
+  font-size: 24px;
+}
+.email-input,.password-input,.username-input,.name-input {
+    background-color: #14142e;
+    height: 36px;
+    width: 90%;
+    margin: 20px 16px 10px 16px;
+    border-radius: 8px;
+    padding: 8px;
+  }
+
+  .username-input:focus,.password-input:focus,.email-input:focus,.name-input:focus {
+    outline: none;
+  }

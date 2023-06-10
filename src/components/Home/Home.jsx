@@ -16,7 +16,7 @@ function Home() {
           <span className="font-bold text-white">A Place to Connect. </span>
             Create and join communities according to your interests. Making Communication and communities easier 
           </div>
-          <Link className="joining-btn">
+          <Link to="/signin" className="joining-btn">
           <div className="text-black font-Inter font-medium text-md text-center rounded-full bg-[#fff] join-btn-div">
            <span className="btn-text">Join BeCommunity</span> <span className="btn-icon">  <BiRightArrowAlt className="arrow-icon" /> </span>
           </div>

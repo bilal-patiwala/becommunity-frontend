@@ -21,7 +21,7 @@ function Navigation() {
               <Nav.Link className='text-white px-4' href="#about">  
                 About
               </Nav.Link>  
-              <Nav.Link className='bg-white rounded-full py-2 w-24 px-2 text-center mx-2' href="#login">  
+              <Nav.Link className='bg-white rounded-full py-2 w-24 px-2 text-center mx-2' href="/login">  
                 <div className='font-bold text-[#050522] hover: text-[#0a0a40]'>Login</div>
               </Nav.Link> 
             </Nav>  
