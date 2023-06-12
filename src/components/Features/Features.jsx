@@ -31,7 +31,7 @@ function Features() {
   return (
     <div>
       <div className="font-Inter text-black text-center text-4xl font-bold my-4">
-        Perks <span className="text-[#6C63FF]">&</span> Features{" "}
+        Perks <span className="text-[#03C988]">&</span> Features{" "}
       </div>
 
       <div className="flex justify-around flex-wrap">

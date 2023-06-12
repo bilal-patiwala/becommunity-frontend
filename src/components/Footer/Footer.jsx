@@ -2,7 +2,7 @@ import React from "react";
 import "./Footer.css";
 function Footer() {
   return (
-    <div className="bg-[#14142E] mt-8 p-4">
+    <div className="bg-[#0F2A36] mt-8 p-4">
       <div className="footer-main-div">
         <div className="footer-box">
           <div className="text-white text-3xl font-semibold font-Inter pt-8 pl-2">
@@ -51,7 +51,7 @@ function Footer() {
           +91 1234567890
           </div>
           <div className="text-[#BCB9B9] text-base font-medium font-Inter p-2">
-          becommunity@gmail.com
+          <a className="mail-link" href="mailto:becommunity2@gmail.com">becommunity2@gmail.com</a>
           </div>
         
         </div>

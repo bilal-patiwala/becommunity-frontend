@@ -1,8 +1,8 @@
 .brand-heading {
   font-size: 24px;
 }
-.email-input,.password-input,.username-input,.name-input {
-    background-color: #14142e;
+.email-input,.password-signin-input,.username-signin-input,.name-input {
+    background-color: #0b222c;
     height: 36px;
     width: 90%;
     margin: 20px 16px 10px 16px;
@@ -10,6 +10,11 @@
     padding: 8px;
   }
 
-  .username-input:focus,.password-input:focus,.email-input:focus,.name-input:focus {
+  .password-signin-input,.username-signin-input,.email-input:focus,.name-input:focus {
     outline: none;
+  }
+
+  .navbar-logo{
+    text-decoration:none;
+    color:black;
   }

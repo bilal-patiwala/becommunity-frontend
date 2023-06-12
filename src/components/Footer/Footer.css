@@ -19,3 +19,7 @@ justify-content: space-around;
         flex-wrap: wrap;
       }
   }
+  .mail-link{
+    text-decoration: none;
+    color: #BCB9B9;
+  }

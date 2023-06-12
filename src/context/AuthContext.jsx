@@ -54,7 +54,7 @@ export const AuthProvider = ({children}) => {
 
     const signupUser = async (email, username, name, password) => {
         // event.preventDefault()
-        await fetch('http://127.0.0.1:8000/register/', {
+        await fetch('http://127.0.0.1:8000/sign-up/', {
             method:"POST",
             headers: {
                 'X-CSRFToken':csrftoken,
@@ -69,7 +69,7 @@ export const AuthProvider = ({children}) => {
                 'Content-Type':'application/json',
                 'X-CSRFToken':csrftoken
             },
-            body: JSON.stringify({username:event.target.username.value, password:event.target.password.value})
+            body: JSON.stringify({email:email, username:username, name:name,password:password})
         })
         let data = await response.json()
         if(response.status === 200){

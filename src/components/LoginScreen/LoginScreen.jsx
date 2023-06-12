@@ -16,21 +16,23 @@ function LoginScreen() {
     formState: { errors },
   } = useForm();
   return (
-    <div className="bg-[#14142E] h-screen">
+    <div className="bg-[#fff] h-screen">
       <div
-        className="text-white font-Inter font-semibold brand-heading px-16 py-4"
+        className="text-black font-Inter font-semibold brand-heading px-16 py-4"
         href="#home"
       >
-        BeCommunity
+        <Link to="/" className="navbar-logo">
+          BeCommunity
+        </Link>
       </div>
       <div className="flex justify-center mt-2">
-        <div className="bg-[#0C0C22] h-[440px] flex flex-row w-[80%] sm:w-[64%] rounded-[24px]">
+        <div className="bg-[#0F2A36] h-[440px] flex flex-row w-[80%] sm:w-[64%] rounded-[24px]">
           <div className="welcome-info w-[40%] flex flex-col h-full justify-center  border-r border-[#606b7a] text-white font-Inter hidden md:flex">
             <div className="text-2xl text-left px-4 font-semibold">
               {" "}
               Welcome Back to BeCommunity.
             </div>
-            <div className="text-2xl align-left m-4 rounded h-[8px] bg-[#6C63FF] w-[120px]"></div>
+            <div className="text-2xl align-left m-4 rounded h-[8px] bg-[#03C988] w-[120px]"></div>
             <div className="text-lg my-2 mx-4">
               Log in to continue to your account
             </div>
@@ -60,7 +62,7 @@ function LoginScreen() {
                     />
                   </div>
                   <button type="submit" className="w-[90%] login-btn">
-                    <div className=" bg-[#6C63FF] hover:bg-[#5f58e6] text-center font-semibold text-md p-2 rounded-[8px]">
+                    <div className=" bg-[#03C988] hover:bg-[#08a36f] text-center font-semibold text-md p-2 rounded-[8px]">
                       Log in
                     </div>
                   </button>
