@@ -13,7 +13,6 @@ export const AuthProvider = ({children}) => {
     let [loginStatus, setLoginStatus] = useState(0);
     const handleLoginNavigate = () => {
         const response = { status: loginStatus };
-        setLoginStatus(0);
         navigate('/login', { state: response });
       };
     function getCookie(name) {
@@ -52,10 +51,7 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('authToken', JSON.stringify(data))
             navigate('/')
         }
-        else{
-            setLoginStatus(response.status);
-            handleLoginNavigate();
-        }
+        return response
     }
 
     const signupUser = async (email, username, name, password) => {
