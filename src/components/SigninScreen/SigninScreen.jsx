@@ -42,7 +42,7 @@ function SigninScreen() {
             </div>
           </div>
           <div className="w-[100%]  md:w-[60%] text-white font-Inter flex flex-col h-full justify-center">
-            <div className="font-semibold text-2xl text-center">Sign In</div>
+            <div className="font-semibold text-2xl text-center">Sign Up</div>
             <div className="signin-form flex justify-center">
               <div className="w-[94%] sm:w-[80%] flex flex-col justify-center">
                 <form onSubmit={handleSubmit(Signin)}>
@@ -85,7 +85,7 @@ function SigninScreen() {
                   </div>
                   <button type="submit" className="w-[90%] login-btn">
                     <div className="  bg-[#03C988] hover:bg-[#08a36f] text-center font-semibold text-md p-2 rounded-[8px]">
-                      Sign in
+                      Sign Up
                     </div>
                   </button>
                 </form>

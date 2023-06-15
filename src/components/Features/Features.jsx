@@ -29,14 +29,14 @@ function Features() {
     },
   ];
   return (
-    <div>
-      <div className="font-Inter text-black text-center text-4xl font-bold my-4">
+    <div id="features" className="mt-10 mb-32">
+      <div className="font-Inter text-black text-center text-4xl font-bold my-20">
         Perks <span className="text-[#03C988]">&</span> Features{" "}
       </div>
 
       <div className="flex justify-around flex-wrap">
         {featureList.map((feature) => (
-          <div key={feature.featureid} className="feature-card">
+          <div key={feature.featureid} className="feature-card transition delay-30 ease-in-out duration-500">
             <div>
               <img
                 src={feature.featureImage}

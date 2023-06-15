@@ -6,7 +6,8 @@ import { BiRightArrowAlt } from 'react-icons/bi';
 function Home() {
   return (
     <div
-      style={{ marginTop: "60px", paddingBottom:"60px" }}
+    id="home"
+      style={{ marginTop: "0px", paddingBottom:"60px" }}
       className="bg-[#0F2A36]"
     >
       <div className="flex justify-around">
