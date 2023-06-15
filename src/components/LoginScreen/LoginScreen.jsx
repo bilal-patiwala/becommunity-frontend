@@ -7,23 +7,14 @@ import { useLocation } from "react-router-dom";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 function LoginScreen() {
   const [loginResponse, setResponse] = useState(0);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
-  const response = location.state;
-  console.log(response);
-  // useEffect(() => {
-  //   setResponse(response.status);
-  //   if (loginResponse === 401) {
-  //     setError("User Not Registered");
-  //   }
-  // });
 
   const { loginUser } = useContext(AuthContext);
-  const login =(data) => {
+  const login = async (data) => {
     if (data.username !== "" && data.password !== "") {
       setLoading(true);
-     loginUser(data.username, data.password);
+      let response = await loginUser(data.username, data.password);
+      setResponse(response.status)
       setLoading(false);
     }
   };
@@ -96,7 +87,7 @@ function LoginScreen() {
                     </div>
                   </button>
                 </form>
-                {response.status===401 ? (
+                {loginResponse===401 ? (
                   <span className="font-Inter mx-[16px] my-0 text-red-400 text-sm	">
                     User not Registered.
                   </span>
