@@ -9,8 +9,13 @@ export const AuthProvider = ({children}) => {
     let [authToken, setAuthToken] = useState(()=> localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('authToken')) : null)
     let  [user, setUser] = useState(()=> localStorage.getItem('authToken') ? jwt_decode(localStorage.getItem('authToken')) : null)
     let navigate = useNavigate()
-    let [loading, setLoading] = useState(true)
-
+    let [loading, setLoading] = useState(true);
+    let [loginStatus, setLoginStatus] = useState(0);
+    const handleLoginNavigate = () => {
+        const response = { status: loginStatus };
+        setLoginStatus(0);
+        navigate('/login', { state: response });
+      };
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== "") {
@@ -48,7 +53,8 @@ export const AuthProvider = ({children}) => {
             navigate('/')
         }
         else{
-            alert("something went wrong")
+            setLoginStatus(response.status);
+            handleLoginNavigate();
         }
     }
 

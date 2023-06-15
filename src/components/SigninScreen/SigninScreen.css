@@ -3,9 +3,10 @@
 }
 .email-input,.password-signin-input,.username-signin-input,.name-input {
     background-color: #0b222c;
-    height: 36px;
+    height: 38px;
     width: 90%;
-    margin: 20px 16px 10px 16px;
+    margin: 16px 16px 10px 12px;
+
     border-radius: 8px;
     padding: 8px;
   }
