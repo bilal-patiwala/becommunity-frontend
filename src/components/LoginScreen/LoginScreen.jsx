@@ -26,7 +26,7 @@ function LoginScreen() {
   return (
     <div className="bg-[#fff] h-screen">
       <div
-        className="text-black font-Inter font-semibold brand-heading px-16 py-4"
+        className="text-black font-Inter font-semibold brand-heading px-12 py-4"
         href="#home"
       >
         <Link to="/" className="navbar-logo">

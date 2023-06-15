@@ -1,11 +1,10 @@
-import React, { useContext,useState } from "react";
+import React, { useContext, useState } from "react";
 import "./SigninScreen.css";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 function SigninScreen() {
-
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState(false);
 
   const validateEmail = (input) => {
@@ -40,7 +39,7 @@ function SigninScreen() {
   return (
     <div className="bg-[#fff] h-screen">
       <div
-        className="text-black font-Inter font-semibold brand-heading px-16 py-4"
+        className="text-black font-Inter font-semibold brand-heading px-12 py-4"
         href="#home"
       >
         <Link to="/" className="navbar-logo">
@@ -77,7 +76,9 @@ function SigninScreen() {
                     />
                     <br />
                     {email.length > 0 && !isValid && (
-                      <span className="font-Inter mx-4 text-red-400 text-sm">Invalid email</span>
+                      <span className="font-Inter mx-4 text-red-400 text-sm">
+                        Invalid email
+                      </span>
                     )}
                   </div>
                   <div className="user-name-input">
