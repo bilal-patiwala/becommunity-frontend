@@ -14,7 +14,7 @@ function LoginScreen() {
     if (data.username !== "" && data.password !== "") {
       setLoading(true);
       let response = await loginUser(data.username, data.password);
-      setResponse(response.status)
+      setResponse(response.status);
       setLoading(false);
     }
   };
@@ -83,11 +83,15 @@ function LoginScreen() {
                   </div>
                   <button type="submit" className="w-[90%] login-btn">
                     <div className=" bg-[#03C988] hover:bg-[#08a36f] text-center font-semibold text-md p-2 rounded-[8px]">
-                      {loading ? <LoadingSpinner height="18px" width="18px"  /> : <span>Log In</span>}
+                      {loading ? (
+                        <LoadingSpinner height="18px" width="18px" />
+                      ) : (
+                        <span>Log In</span>
+                      )}
                     </div>
                   </button>
                 </form>
-                {loginResponse===401 ? (
+                {loginResponse === 401 ? (
                   <span className="font-Inter mx-[16px] my-0 text-red-400 text-sm	">
                     User not Registered.
                   </span>

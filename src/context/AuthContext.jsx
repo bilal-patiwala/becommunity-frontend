@@ -129,7 +129,23 @@ export const AuthProvider = ({children}) => {
         return ()=> clearInterval(interval)
     },[authToken, loading])
 
+
+    let get_user = async () => {
+        let response = await fetch("http://127.0.0.1:8000/get_user", {
+          headers : {
+            "Content-Type":"application/json",
+            "Authorization": `Bearer ${authToken.refresh}`
+          }
+        })
+
+        let data = await response.json()
+        console.log(data);
+        return data;
+    }
+
+
     let contextData= {
+        get_user:get_user,
         user:user,
         loginUser:loginUser,
         logout:logout,
