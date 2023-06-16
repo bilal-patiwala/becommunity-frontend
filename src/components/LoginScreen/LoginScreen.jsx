@@ -83,7 +83,7 @@ function LoginScreen() {
                   </div>
                   <button type="submit" className="w-[90%] login-btn">
                     <div className=" bg-[#03C988] hover:bg-[#08a36f] text-center font-semibold text-md p-2 rounded-[8px]">
-                      {loading ? <LoadingSpinner /> : <span>Log In</span>}
+                      {loading ? <LoadingSpinner height="18px" width="18px"  /> : <span>Log In</span>}
                     </div>
                   </button>
                 </form>

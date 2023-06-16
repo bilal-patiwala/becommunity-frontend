@@ -6,7 +6,7 @@ import infoImage2 from "../../assets/undraw_social_interaction_re_dyjh.svg";
 import infoImage3 from "../../../public/info3.svg";
 function Information() {
   return (
-    <div id="about" className="my-10">
+    <div id="about" className="my-6">
       <motion.div 
        initial="hidden"
        whileInView="visible"
@@ -16,7 +16,7 @@ function Information() {
          visible: { opacity: 1, translateY: 0 },
          hidden: { opacity: 0, translateY: 100 },
        }}
-      className='flex justify-center items-center flex-wrap-reverse mt-4 mb-10 py-20'>
+      className='flex justify-center items-center flex-wrap-reverse mt-0 mb-4'>
         <div className='info-box-1'>
           <img src={infoImage1} alt="" className="info-img" />
         </div>
@@ -35,7 +35,7 @@ function Information() {
          visible: { opacity: 1, translateY: 0 },
          hidden: { opacity: 0, translateY: 100 },
        }}
-      className='flex justify-center items-center flex-wrap mt-8 bg-gray-100 py-20'>
+      className='flex justify-center items-center flex-wrap mt-2 mb-4 py-4 bg-gray-100'>
         <div className='info-box-1'>
           <div className='font-bold text-3xl font-Inter text-black mt-2'>Create your own or Join</div>
           <div className='font-Inter text-[#4D4A4A] mt-4 text-xl'>If you want to create your own community then create it and invite other people to join, or join someone else's communities if you interested in them.</div>
@@ -53,7 +53,7 @@ function Information() {
          visible: { opacity: 1, translateY: 0 },
          hidden: { opacity: 0, translateY: 100 },
        }}
-      className='flex justify-center items-center flex-wrap-reverse mt-4 mb-20 py-20'>
+      className='flex justify-center items-center flex-wrap-reverse mt-2 mb-4 py-4'>
         <div className='info-box-1'>
           <img src={infoImage3} alt="" className="info-img" />
         </div>

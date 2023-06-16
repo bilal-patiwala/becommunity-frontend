@@ -1,8 +1,8 @@
 import React from "react";
 import "./LoadingSpinner.css";
-function LoadingSpinner() {
+function LoadingSpinner({height, width}) {
   return (
-    <span class="loader"></span>
+    <span style={{height:height,width:width}} class="loader"></span>
   );
 }
 
