@@ -4,3 +4,12 @@
 .navbar-toggler{
     background-color: white;
 }
+
+@media (min-width: 765px) and (max-width: 1000px) {
+    .navBox {
+        padding-left: 0px;
+    }
+    .navBox ul li {
+        margin-left: 20px;
+    }
+}

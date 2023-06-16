@@ -55,7 +55,7 @@ export default function Navigation() {
           <i className={open ? 'fa fa-close text-white' : 'fa-solid fa-bars text-white'}></i>
         </div>
 
-        <div className="w-3/4 flex flex-row items-center ml-44">
+        <div className="navBox w-3/4 flex flex-row items-center justify-left pl-10">
           <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[1] left-0 w-full md:w-auto md:pl-0 transition-all duration-500 ease-in ${open ? 'top-14 bg-[#0F2A36]' : 'top-[-490px]'}`}>
             <li className='md:ml-10 ml-4 md:my-0 my-7'>
               <a href="#" className={`transition delay-40 text-white no-underline font-medium font-poppins border-b-2 border-transparent tracking-wider text-lg hover:text-green-500 hover:border-white duration-200`}>
