@@ -43,7 +43,7 @@ export default function Navigation() {
   const [loginState, setLoginState] = useState(false);
 
   return (
-    <header id="navbar" className="relative z-10 bg-[#0F2A36] rounded-sm shadow-xl w-full sticky top-0 left-0">
+    <header id="navbar" className="relative z-10 bg-[#0F2A36] shadow-xl w-full sticky top-0 left-0">
       <nav className="container md:flex items-center flex-row w-full pt-3 pb-1 md:pl-0 pl-5 md:px-1">
         <div className='w-1/4 font-bold text-2xl cursor-pointer flex text-left items-center pb-3'>
           <a className="flex flex-row no-underline" href="/">

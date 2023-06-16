@@ -6,6 +6,8 @@ import Signin from "./pages/Signin/Signin";
 import Homepage from "./pages/Homepage/Homepage";
 import { AuthProvider } from "./context/AuthContext";
 import { PrivateRoute } from "./utils/PrivateRoute";
+import ChooseInterest from "./pages/ChooseInterest/ChooseInterest";
+import Recommendation from "./pages/Recommendation/Recommendation";
 function App() {
   return (
     <div>
@@ -18,6 +20,9 @@ function App() {
 
             <Route path="/login" element={<Login />} />
             <Route path="/signin" element={<Signin />} />
+            <Route path="/chooseinterest" element={<ChooseInterest/>}/>
+            <Route path="/recommendations" element={<Recommendation/>}/>
+            
           </Routes>
         </AuthProvider>
       </BrowserRouter>

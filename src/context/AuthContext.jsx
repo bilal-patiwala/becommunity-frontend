@@ -9,8 +9,12 @@ export const AuthProvider = ({children}) => {
     let [authToken, setAuthToken] = useState(()=> localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('authToken')) : null)
     let  [user, setUser] = useState(()=> localStorage.getItem('authToken') ? jwt_decode(localStorage.getItem('authToken')) : null)
     let navigate = useNavigate()
-    let [loading, setLoading] = useState(true)
-
+    let [loading, setLoading] = useState(true);
+    let [loginStatus, setLoginStatus] = useState(0);
+    const handleLoginNavigate = () => {
+        const response = { status: loginStatus };
+        navigate('/login', { state: response });
+      };
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== "") {
@@ -47,9 +51,7 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('authToken', JSON.stringify(data))
             navigate('/')
         }
-        else{
-            alert("something went wrong")
-        }
+        return response
     }
 
     const signupUser = async (email, username, name, password) => {
@@ -77,7 +79,7 @@ export const AuthProvider = ({children}) => {
             // to run or to access below jwt function you have to npm install jwt-decode
             setUser(jwt_decode(data.access))
             localStorage.setItem('authToken', JSON.stringify(data))
-            navigate("/");
+            navigate("/chooseinterest");
         }
         else{
             alert('Something went wrong!')
@@ -127,7 +129,23 @@ export const AuthProvider = ({children}) => {
         return ()=> clearInterval(interval)
     },[authToken, loading])
 
+
+    let get_user = async () => {
+        let response = await fetch("http://127.0.0.1:8000/get_user", {
+          headers : {
+            "Content-Type":"application/json",
+            "Authorization": `Bearer ${authToken.refresh}`
+          }
+        })
+
+        let data = await response.json()
+        console.log(data);
+        return data;
+    }
+
+
     let contextData= {
+        get_user:get_user,
         user:user,
         loginUser:loginUser,
         logout:logout,

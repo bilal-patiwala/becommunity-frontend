@@ -2,7 +2,7 @@ import React from "react";
 import "./Footer.css";
 function Footer() {
   return (
-    <div className="bg-[#0F2A36] mt-8 p-4">
+    <div id="contact" className="bg-[#0F2A36] mt-8 p-4">
       <div className="footer-main-div">
         <div className="footer-box">
           <div className="text-white text-3xl font-semibold font-Inter pt-8 pl-2">
