@@ -32,7 +32,7 @@ function RecommendationPage() {
           <div>{community.name}</div>
           <div>{community.description}</div>
           <div>{community.creator}</div>
-<img src={community.image} alt="" />
+          <img src={community.image} alt="" />
         </div>
       ))}
     </div>
