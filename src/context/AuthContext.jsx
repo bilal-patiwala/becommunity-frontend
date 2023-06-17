@@ -144,7 +144,21 @@ export const AuthProvider = ({children}) => {
     }
 
 
+    let get_communities = async (interestdata) =>{
+        let response = await fetch("http://127.0.0.1:8000/get_communities/",{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'X-CSRFToken':csrftoken
+            },
+            body: JSON.stringify({interestdata})
+        })
+        let data = await response.json()
+        return data;
+    }
+
     let contextData= {
+        get_communities:get_communities,
         get_user:get_user,
         user:user,
         loginUser:loginUser,
