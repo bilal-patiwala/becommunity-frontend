@@ -7,18 +7,29 @@ function RecommendationPage() {
   const location = useLocation();
   const interestvalues = location.state?.interestvalues;
   const [interestdata, setInterestData] = useState([]);
-  const [communities, setCommunities] = useState([]);
-  const { get_communities } = useContext(AuthContext);
+  const [communities, setCommunities] = useState({});
+  const {csrftoken} = useContext(AuthContext)
 
   useEffect(() => {
-    setInterestData(interestvalues);
-    getCommunityRecommendation();
+    get_communities();
   }, [interestvalues]);
 
-  const getCommunityRecommendation = async () => {
-    let data = await get_communities(interestdata);
-    setCommunities(data);
-  };
+  let get_communities = async () =>{
+    console.log(interestvalues);
+    let response = await fetch("http://127.0.0.1:8000/get_community/",{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken
+        },
+        body: JSON.stringify({'data':interestvalues})
+    })
+    let data = await response.json()
+    console.log(data)
+    setCommunities(data)
+    console.log(communities);
+}
+
 
   // const communities = [
   //   { id: 1, name: "Codecrafters", description: "Hello1" },
@@ -27,12 +38,17 @@ function RecommendationPage() {
 
   return (
     <div>
-      {communities.map((community) => (
-        <div key={community.id}>
-          <div>{community.name}</div>
-          <div>{community.description}</div>
-          <div>{community.creator}</div>
-          <img src={community.image} alt="" />
+     {Object.entries(communities).map(([category, communityList]) => (
+        <div key={category}>
+          <h3>{category}</h3>
+          {communityList.map((community) => (
+            <div key={community.id}>
+              <h4>{community.name}</h4>
+              <p>{community.description}</p>
+              <img src={`http://localhost:8000${community.image}`} alt="" />
+              {/* Render other properties of the community as needed */}
+            </div>
+          ))}
         </div>
       ))}
     </div>
