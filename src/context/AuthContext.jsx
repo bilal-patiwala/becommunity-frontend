@@ -139,7 +139,6 @@ export const AuthProvider = ({children}) => {
         })
 
         let data = await response.json()
-        console.log(data);
         return data;
     }
 

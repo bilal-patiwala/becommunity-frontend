@@ -8,57 +8,57 @@ function RecommendationPage() {
   const location = useLocation();
   const interestvalues = location.state?.interestvalues;
   const [interestdata, setInterestData] = useState([]);
-  // const [communities, setCommunities] = useState({});
-  //   const {csrftoken} = useContext(AuthContext)
+  const [communities, setCommunities] = useState({});
+    const {csrftoken} = useContext(AuthContext)
 
-  //   useEffect(() => {
-  //     get_communities();
-  //   }, [interestvalues]);
+    useEffect(() => {
+      get_communities();
+    }, [interestvalues]);
 
-  //   let get_communities = async () =>{
-  //     console.log(interestvalues);
-  //     let response = await fetch("http://127.0.0.1:8000/get_community/",{
-  //         method:'POST',
-  //         headers:{
-  //             'Content-Type':'application/json',
-  //             'X-CSRFToken':csrftoken
-  //         },
-  //         body: JSON.stringify({'data':interestvalues})
-  //     })
-  //     let data = await response.json()
-  //     console.log(data)
-  //     setCommunities(data)
-  //     console.log(communities);
-  // }
+    let get_communities = async () =>{
+      console.log(interestvalues);
+      let response = await fetch("http://127.0.0.1:8000/get_community/",{
+          method:'POST',
+          headers:{
+              'Content-Type':'application/json',
+              'X-CSRFToken':csrftoken
+          },
+          body: JSON.stringify({'data':interestvalues})
+      })
+      let data = await response.json()
+      console.log(data)
+      setCommunities(data)
+      console.log(communities);
+  }
 
-  const communities = {
-    Technology: [
-      {
-        id: 1,
-        name: "TechTalk",
-        description: "A place for tech enthusiasts to discuss",
-        creator: "ameliah",
-        image: null,
-      },
-      {
-        id: 2,
-        name: "CodeCrafters",
-        description: "Join fellow programmers",
-        creator: "avat",
-        image: null,
-      },
-      {
-        id: 4,
-        name: "eSportsElite",
-        description: "eSportsElite is the ultimate destination",
-        creator: "avat",
-        image: "/media/community/60561.jpg",
-      },
-    ],
-  };
+  // const communities = {
+  //   Technology: [
+  //     {
+  //       id: 1,
+  //       name: "TechTalk",
+  //       description: "A place for tech enthusiasts to discuss",
+  //       creator: "ameliah",
+  //       image: null,
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "CodeCrafters",
+  //       description: "Join fellow programmers",
+  //       creator: "avat",
+  //       image: null,
+  //     },
+  //     {
+  //       id: 4,
+  //       name: "eSportsElite",
+  //       description: "eSportsElite is the ultimate destination",
+  //       creator: "avat",
+  //       image: "/media/community/60561.jpg",
+  //     },
+  //   ],
+  // };
 
   return (
-    <div className="bg-[#0F2A36] h-screen">
+    <div className="bg-[#0F2A36] h-full">
       <div
         className="text-black font-Inter font-semibold brand-heading px-12 py-4"
         href="#home"
