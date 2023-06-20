@@ -45,9 +45,9 @@ export default function Navigation() {
   return (
     <header id="navbar" className="relative z-10 bg-[#0F2A36] shadow-xl w-full sticky top-0 left-0">
       <nav className="container md:flex items-center flex-row w-full pt-3 pb-1 md:pl-0 pl-5 md:px-1">
-        <div className='w-1/4 font-bold text-2xl cursor-pointer flex text-left items-center pb-3'>
+        <div className='w-1/4 font-semibold text-2xl cursor-pointer flex text-left items-center pb-3'>
           <a className="flex flex-row no-underline" href="/">
-            <span className="text-white font-sans">BeCommunity</span>
+            <span className="text-white font-Inter">BeCommunity</span>
           </a>
         </div>
 
@@ -91,7 +91,7 @@ export default function Navigation() {
                 </div>
                 :
                 <div className="w-fit h-fit md:ml-0 bg-green-500 rounded-lg p-2 px-3 hover:bg-green-600">
-                  <a href="/signin" className={`transition delay-40 font-bold no-underline font-sans text-xl text-white border-b-2 border-transparent duration-200`}>
+                  <a href="/signin" className={`transition delay-40 font-bold no-underline font-Inter text-lg text-white border-b-2 border-transparent duration-200`}>
                     Sign Up
                   </a>
                 </div>

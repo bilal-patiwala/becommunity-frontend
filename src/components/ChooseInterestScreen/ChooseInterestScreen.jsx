@@ -11,13 +11,27 @@ function ChooseInterestScreen() {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [interestArray, setInterestValue] = useState([]);
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
   // const history = useHistory();
   const { authToken } = useContext(AuthContext);
 
+  const get_categories = async () => {
+    let response = await fetch("http://127.0.0.1:8000/get-categories/", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    let data = await response.json();
+    // return data;
+    setCategories(data);
+  };
+  const slicedArrayCategories = categories.slice(0, 15);
+
   const { get_user } = useContext(AuthContext);
   useEffect(() => {
     getCurrentUser();
+    get_categories();
   }, []);
 
   const getCurrentUser = async () => {
@@ -35,11 +49,8 @@ function ChooseInterestScreen() {
   };
 
   const handleCategorySelection = () => {
-    navigate('/recommendations', { state: { interestvalues: interestArray } });
-  }
-  
-
-
+    navigate("/recommendations", { state: { interestvalues: interestArray } });
+  };
 
   return (
     <div className="bg-[#0F2A36] h-screen">
@@ -72,21 +83,21 @@ function ChooseInterestScreen() {
               ) : null}
             </div>
             <div className="interest-categories flex flex-wrap">
-              {interest.map((interest) => (
+              {slicedArrayCategories.map((interest) => (
                 <Link
-                  key={interest.value}
-                  onClick={() => handleInterestSelect(interest.value)}
+                  key={interest.name}
+                  onClick={() => handleInterestSelect(interest.name)}
                   style={{
-                    backgroundColor: interestArray.includes(interest.value)
+                    backgroundColor: interestArray.includes(interest.name)
                       ? "black"
                       : "white",
-                    color: interestArray.includes(interest.value)
+                    color: interestArray.includes(interest.name)
                       ? "white"
                       : "black",
                   }}
                   className="no-underline p-[8px] my-2 ml-0 mr-2 rounded-[10px]"
                 >
-                  {interest.value}
+                  {interest.name}
                 </Link>
               ))}
             </div>

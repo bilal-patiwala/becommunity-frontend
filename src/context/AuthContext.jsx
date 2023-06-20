@@ -139,12 +139,14 @@ export const AuthProvider = ({children}) => {
         })
 
         let data = await response.json()
-        console.log(data);
         return data;
     }
 
 
+    
+
     let contextData= {
+        csrftoken:csrftoken,
         get_user:get_user,
         user:user,
         loginUser:loginUser,
