@@ -16,6 +16,7 @@ function RecommendationPage() {
   const [joinLoading, setJoinLoading] = useState(false);
 
   let [c_id, setCId] = useState([]);
+  let [d_id, setDId] = useState([]);
 
   useEffect(() => {
     get_communities();
@@ -67,6 +68,7 @@ function RecommendationPage() {
 
   const join = async (id) => {
     setJoinLoading(true);
+    setDId([...d_id, id]);
     let response = await fetch("http://127.0.0.1:8000/join/", {
       method: "POST",
       headers: {
@@ -89,7 +91,7 @@ function RecommendationPage() {
   };
   
   return (
-    <div className="bg-[#0F2A36] h-screen">
+    <div className="bg-[#0F2A36]">
       <div
         className="text-black font-Inter font-semibold brand-heading px-12 py-4"
         href="#home"
@@ -141,13 +143,13 @@ function RecommendationPage() {
                     <div className="flex justify-center">
                       <button
                         className=" rounded-[8px] mt-4 mb-1 bg-[#00FF84] hover:bg-[#09ed7f] w-[90%]"
-                        onClick={() => join(community.id)}
-                      >
+                        onClick={() => join(community.id)}>
+                          
                         {c_id.includes(community.id) ? (
                           <div className="py-[4px] font-Inter font-semibold">Joined</div>
                         ) : (
                           <div>
-                            {joinLoading ? (
+                            {joinLoading && d_id.includes(community.id) ? (
                               <div className="py-[2px] mb-2 mt-1 flex justify-center">
                                 <LoadingSpinner height="16px" width="16px" />
                               </div>
