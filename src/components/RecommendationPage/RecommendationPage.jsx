@@ -58,7 +58,7 @@ function RecommendationPage() {
   // };
 
   return (
-    <div className="bg-[#0F2A36] h-full">
+    <div className="bg-[#0F2A36]">
       <div
         className="text-black font-Inter font-semibold brand-heading px-12 py-4"
         href="#home"
@@ -71,8 +71,11 @@ function RecommendationPage() {
         We have selected these communities based on your interest available on
         our platform which you can join.
       </div>
+
+
+
       {Object.entries(communities).map(([category, communityList]) => (
-        <div key={category}>
+        <div className="border border-white" key={category}>
           <div className="font-Inter text-white text-lg p-4 font-semibold">
             {category}
           </div>
