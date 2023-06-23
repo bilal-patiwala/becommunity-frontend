@@ -146,6 +146,7 @@ export const AuthProvider = ({children}) => {
     
 
     let contextData= {
+        authToken:authToken,
         csrftoken:csrftoken,
         get_user:get_user,
         user:user,
