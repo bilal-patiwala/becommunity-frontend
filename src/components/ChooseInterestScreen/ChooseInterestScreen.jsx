@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import { motion } from "framer-motion";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import RecommendationPage from "../RecommendationPage/RecommendationPage";
+import Modal from "../RecommendationPage/Modal";
 function ChooseInterestScreen() {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [interestArray, setInterestValue] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [recommendationModal, setRecommendationModal] = useState(false);
   const navigate = useNavigate();
   // const history = useHistory();
   const { authToken } = useContext(AuthContext);
@@ -49,10 +50,15 @@ function ChooseInterestScreen() {
   };
 
   const handleCategorySelection = () => {
-    navigate("/recommendations", { state: { interestvalues: interestArray } });
+    setRecommendationModal(true);
+    // navigate("/recommendations", { state: { interestvalues: interestArray } });
   };
 
   return (
+    <>
+
+    {recommendationModal && <Modal closeModal={setRecommendationModal} interestvalues={interestArray}/>}
+
     <div className="bg-[#0F2A36] h-screen">
       <div
         className="text-black font-Inter font-semibold brand-heading px-12 py-4"
@@ -120,6 +126,7 @@ function ChooseInterestScreen() {
         </motion.div>
       )}
     </div>
+    </>
   );
 }
 
