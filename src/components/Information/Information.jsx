@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import "./Information.css"
 import infoImage1 from "../../assets/undraw_people_re_8spw.svg";
 import infoImage2 from "../../assets/undraw_social_interaction_re_dyjh.svg";
-import infoImage3 from "../../../public/info3.svg";
+import infoImage3 from "../../assets/info3.svg";
 function Information() {
   return (
     <div id="about" className="my-6">

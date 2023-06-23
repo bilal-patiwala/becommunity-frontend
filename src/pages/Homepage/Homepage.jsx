@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react';
+import HomePageScreen from '../../components/HomePageScreen/HomePageScreen';
 
 function Homepage() {
+
   return (
-    <div>Homepage</div>
+    <div>
+      <HomePageScreen />
+    </div>
   )
 }
 

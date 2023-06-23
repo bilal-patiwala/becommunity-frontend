@@ -3,10 +3,12 @@ import "./SigninScreen.css";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+
 function SigninScreen() {
   const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const validateEmail = (input) => {
     const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     const isValidEmail = regex.test(input);
@@ -21,6 +23,7 @@ function SigninScreen() {
   };
   const { signupUser } = useContext(AuthContext);
   const Signin = (data) => {
+    setLoading(true);
     if (
       data.username !== "" &&
       data.password !== "" &&
@@ -29,6 +32,7 @@ function SigninScreen() {
     ) {
       signupUser(data.email, data.username, data.name, data.password);
     }
+    setLoading(false);
   };
   const {
     register,
@@ -133,7 +137,11 @@ function SigninScreen() {
                   </div>
                   <button type="submit" className="w-[90%] login-btn">
                     <div className="  bg-[#03C988] hover:bg-[#08a36f] text-center font-semibold text-md p-2 rounded-[8px]">
-                      Sign Up
+                    {loading ? (
+                        <LoadingSpinner height="18px" width="18px" />
+                      ) : (
+                        <span>Sign Up</span>
+                      )}
                     </div>
                   </button>
                 </form>

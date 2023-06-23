@@ -1,0 +1,12 @@
+#search{
+    font-size: 18px;
+    font-family: 'Inter', 'sans-serif';
+}
+
+#search:focus{
+    outline: 1px white solid;
+}
+::placeholder{
+    font-size: 18px;
+    font-family: 'Inter', 'sans-serif';
+}
