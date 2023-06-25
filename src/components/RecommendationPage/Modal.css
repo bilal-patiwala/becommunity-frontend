@@ -1,8 +1,14 @@
 .ModalContainer {
-    max-height: 70vh;
+    height: 70vh;
     overflow-y: auto;
 }
+.model-main-container{
+    height: 100%;
+}
+.Modal{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
+}
 ::-webkit-scrollbar{
     width: 5px;
 }
@@ -13,5 +19,5 @@
 
 ::-webkit-scrollbar-thumb{
     background: linear-gradient(rgb(60, 238, 137), rgb(3, 132, 84));
-    border-radius: 25px; 
+    border-radius: 44px; 
 }

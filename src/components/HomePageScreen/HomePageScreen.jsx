@@ -1,12 +1,47 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Tooltip from "@mui/material/Tooltip";
 import "./HomePageScreen.css";
 import userImg from "../../assets/WhatsApp Image 2022-04-29 at 5.15.34 PM.jpeg";
+import AuthContext from "../../context/AuthContext";
 function HomePageScreen() {
+  const { authToken } = useContext(AuthContext);
+  const [postsData, setPostsData] = useState([]);
+  const [joinedCommunities, setJoinedCommunities] = useState([])
+  useEffect(() => {
+    get_post();
+    get_joined_communities();
+  }, []);
+
+  const get_post = async () => {
+    let response = await fetch("http://127.0.0.1:8000/get-post/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken.refresh}`,
+      },
+    });
+    let data = await response.json();
+    console.log("posts",data);
+    setPostsData(data);
+  };
+
+  const get_joined_communities = async () =>{
+    let response = await fetch("http://127.0.0.1:8000/get_user_joined_community/",{
+      method:"GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken.refresh}`,
+      },
+    })
+    let data = await response.json();
+    console.log("communities joined",data);
+    setJoinedCommunities(data);
+  }
+
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-[#0F2A36] h-screen">
+    <div className="bg-[#0F2A36]">
       <header
         id="navbar"
         className="relative z-20 bg-[#0F2A36] shadow-xl w-full sticky top-0 left-0"
@@ -55,7 +90,7 @@ function HomePageScreen() {
                 title="Create a Community"
                 arrow
               >
-                <button className="text-4xl text-white font-semibold">+</button>
+                <button className="text-4xl text-white font-semibold font-Inter">+</button>
               </Tooltip>
             </div>
 
@@ -71,11 +106,11 @@ function HomePageScreen() {
 
       <div
         style={{ justifyContent: open ? "space-between" : "space-around" }}
-        className="w-full flex h-screen bg-[#0F2A36]"
+        className="w-full flex bg-[#0F2A36]"
       >
         <div
           style={{ display: open ? "block" : "none" }}
-          className="w-1/5 h-screen flex flex-col items-center shadow-xl z-10 p-2 bg-[#0B222C] left-0 top-10"
+          className="w-1/5 font-Inter h-screen flex flex-col items-center shadow-xl z-10 p-2 bg-[#0B222C] left-0 top-10 sticky overflow-y-auto"
         >
           <div className="w-2/3 bg-[#0F2A36] text-white py-2 text-center text-xl rounded-lg w-full mt-4 mb-4 cursor-pointer">
             Home
@@ -89,19 +124,34 @@ function HomePageScreen() {
           <div className="w-2/3 border-b-2 border-white text-white py-2 text-left text-xl w-full mb-4">
             Joined
           </div>
-          <div className="w-2/3 bg-[#0B222C] text-white py-2 text-center text-xl rounded-lg w-full mb-4 cursor-pointer">
-            Marvel
-          </div>
-          <div className="w-2/3 bg-[#0B222C] text-white py-2 text-center text-xl rounded-lg w-full mb-4 cursor-pointer">
-            Astro
-          </div>
-          <div className="w-2/3 bg-[#0B222C] text-white py-2 text-center text-xl rounded-lg w-full mb-4 cursor-pointer">
-            Books
-          </div>
+
+
+          {joinedCommunities.map((community)=>(
+             <div key={community.id} className="w-2/3 bg-[#0B222C] text-white py-2 text-center text-xl rounded-lg w-full mb-4 cursor-pointer">
+             {community.name}
+           </div>
+          ))}
         </div>
 
-        <div className="w-3/5 h-screen flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5">
-          <div className="w-2/3 rounded-lg bg-[#0B222C] py-3 mb-5">
+        <div className="w-3/5 flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5">
+          {postsData.map((post) => (
+            <div className="font-Inter w-2/3 rounded-lg bg-[#0B222C] py-3 mb-5">
+              <div className="title text-[#ACACAC] py-2 px-4">
+                {post.post_creator} | {post.community}
+              </div>
+              <div className="content font-semibold text-lg text-white px-4 pb-2">{post.title}</div>
+              <div className="content text-[#c2c2c2] px-4 pb-4">
+                {post.description}
+              </div>
+              {post.image && (
+                <div>
+                  <img src={`http://127.0.0.1:8000${post.image}`} alt="" />
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* <div className="w-2/3 rounded-lg bg-[#0B222C] py-3 mb-5 border border-white">
             <div className="title text-[#ACACAC] py-2 px-4">
               Sam67 | SpaceTalks
             </div>
@@ -118,8 +168,8 @@ function HomePageScreen() {
                 <span className="text-gray-400 mx-2">23</span>
               </i>
             </div>
-          </div>
-          <div className="w-2/3 rounded-lg bg-[#0B222C] py-3 mb-5">
+          </div> */}
+          {/* <div className="w-2/3 rounded-lg bg-[#0B222C] py-3 mb-5">
             <div className="title text-[#ACACAC] py-2 px-4">
               Sam67 | SpaceTalks
             </div>
@@ -136,10 +186,10 @@ function HomePageScreen() {
                 <span className="text-gray-400 mx-2">23</span>
               </i>
             </div>
-          </div>
+          </div> */}
         </div>
 
-        <div className="w-1/5 h-screen flex flex-col shadow-xl z-10 p-2 bg-[#0B222C] rounded-lg sticky right-0 top-10">
+        <div className="w-1/5 h-screen font-Inter flex flex-col shadow-xl z-10 p-2 bg-[#0B222C] rounded-lg sticky right-0 top-10">
           <p className="text-center text-white mt-5 font-medium text-xl">
             Popular Communities
           </p>
