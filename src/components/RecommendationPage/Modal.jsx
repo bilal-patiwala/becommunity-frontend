@@ -99,7 +99,7 @@ function Modal({ closeModal, interestvalues }) {
 
   return (
     <div className="Modal bg-gray-700 bg-opacity-60 backdrop-filter backdrop-blur-sm z-30 w-full py-5 fixed flex justify-center h-screen items-center">
-      <div className="ModalContainer h-screen relative md:w-1/2 w-full md:mx-0 mx-5 rounded-[34px] flex flex-col">
+      <div className="ModalContainer h-screen relative md:w-1/2 w-full md:mx-0 mx-5 rounded-lg flex flex-col">
         <div className="flex flex-col items-center py-1 pl-1 rounded-[34px]">
           <div className="w-full relative font-semibold bold text-white text-2xl">
             <button
@@ -193,15 +193,17 @@ function Modal({ closeModal, interestvalues }) {
                   )
                 )}{" "}
                 <Link to="/">
+                  <div className="w-full bg-[#0F2A36] text-center sticky bottom-0">
                   <button
                     id="goto-homepage-btn"
-                    className="m-4 ml-5 rounded-[12px] bg-[#03C988] hover:bg-[#08a36f]"
+                    className="m-2 rounded-[12px] bg-[#03C988] hover:bg-[#08a36f]"
                     type="submit"
                   >
-                    <div className="px-4 py-2 text-black font-Inter font-semibold">
-                      Submit
+                    <div className="px-5 py-2 text-md text-black font-Inter font-semibold">
+                      Next <i className="fa fa-arrow-right ml-1"></i>
                     </div>
                   </button>
+                  </div>
                 </Link>
               </div>
             )}
