@@ -134,6 +134,7 @@ function HomePageScreen() {
         </div>
 
         <div className={`${open ? 'w-3/5' : 'w-4/5'} flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}>
+          
           {postsData.map((post) => (
             <div className="font-Inter w-2/3 rounded-lg bg-[#0B222C] py-3 mb-5">
               <div className="title text-[#ACACAC] py-2 px-4">

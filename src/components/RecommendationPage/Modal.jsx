@@ -100,7 +100,7 @@ function Modal({ closeModal, interestvalues }) {
   return (
     <div className="Modal bg-gray-700 bg-opacity-60 backdrop-filter backdrop-blur-sm z-30 w-full py-5 fixed flex justify-center h-screen items-center">
       <div className="ModalContainer h-screen relative md:w-1/2 w-full md:mx-0 mx-5 rounded-lg flex flex-col">
-        <div className="flex flex-col items-center py-1 pl-1 rounded-[34px]">
+        <div className="flex flex-col items-center py-1 pl-1 rounded-lg">
           <div className="w-full relative font-semibold bold text-white text-2xl">
             <button
               id="close"
