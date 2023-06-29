@@ -1,0 +1,41 @@
+.name-input {
+  background-color: #0b222c;
+  height: 38px;
+  width: 70%;
+  margin: 16px 16px 10px 12px;
+  border-radius: 8px;
+  padding: 8px;
+}
+.name-input:focus {
+  outline: 2px white solid;
+}
+.description-input {
+  background-color: #0b222c;
+  height: 160px;
+  width: 70%;
+  margin: 16px 16px 10px 12px;
+  border-radius: 8px;
+  padding: 8px;
+}
+.select-categories {
+  width: 70%;
+  margin: 16px 16px 10px 12px;
+  background-color: #2f2c2c;
+  border: 2px solid;
+  border-radius: 8px;
+  border-color: #1c1c1c;
+}
+
+.css-13cymwt-control {
+  background-color: hsl(0, 0%, 0%);
+}
+.css-t3ipsp-control {
+  background-color: hsl(0deg 0% 20%);
+}
+
+.css-t3ipsp-control:hover {
+  border: 2px rgb(57, 56, 56) solid;
+}
+.css-1nmdiq5-menu {
+  color: black;
+}

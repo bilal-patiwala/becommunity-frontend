@@ -9,6 +9,7 @@ import { PrivateRoute } from "./utils/PrivateRoute";
 import ChooseInterest from "./pages/ChooseInterest/ChooseInterest";
 import Recommendation from "./pages/Recommendation/Recommendation";
 import CreatePost from "./components/CreatePost/CreatePost";
+import CreateCommunity from "./components/CreateCommunity/CreateCommunity";
 function App() {
   return (
     <div>
@@ -24,6 +25,7 @@ function App() {
             <Route path="/chooseinterest" element={<ChooseInterest/>}/>
             <Route path="/recommendations" element={<Recommendation/>}/>
             <Route path="/create-post" element={<CreatePost/>}/>
+            <Route path="/create-community" element={<CreateCommunity/>}/>
             
           </Routes>
         </AuthProvider>
