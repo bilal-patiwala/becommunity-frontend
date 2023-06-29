@@ -3,10 +3,13 @@ import Tooltip from "@mui/material/Tooltip";
 import "./HomePageScreen.css";
 import userImg from "../../assets/WhatsApp Image 2022-04-29 at 5.15.34 PM.jpeg";
 import AuthContext from "../../context/AuthContext";
+import CreatePostModal from "../CreatePost/CreatePostModal";
 function HomePageScreen() {
   const { authToken } = useContext(AuthContext);
   const [postsData, setPostsData] = useState([]);
-  const [joinedCommunities, setJoinedCommunities] = useState([])
+  const [joinedCommunities, setJoinedCommunities] = useState([]);
+  const [postBtn, setPostBtn] = useState(false);
+
   useEffect(() => {
     get_post();
     get_joined_communities();
@@ -21,26 +24,35 @@ function HomePageScreen() {
       },
     });
     let data = await response.json();
-    console.log("posts",data);
+    console.log("posts", data);
     setPostsData(data);
   };
 
-  const get_joined_communities = async () =>{
-    let response = await fetch("http://127.0.0.1:8000/get_user_joined_community/",{
-      method:"GET",
+  const post = (e) => {
+    e.preventDefault();
+    setPostBtn(true);
+  }
+
+  const get_joined_communities = async () => {
+    let response = await fetch("http://127.0.0.1:8000/get_user_joined_community/", {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${authToken.refresh}`,
       },
     })
     let data = await response.json();
-    console.log("communities joined",data);
+    console.log("communities joined", data);
     setJoinedCommunities(data);
   }
 
   const [open, setOpen] = useState(true);
 
   return (
+    <>
+
+    {postBtn && <CreatePostModal closeModal={setPostBtn}/>}
+
     <div className="bg-[#0F2A36]">
       <header
         id="navbar"
@@ -104,6 +116,11 @@ function HomePageScreen() {
         </nav>
       </header>
 
+      <Tooltip className="transition delay-40 ease-in duration-400 text-black" title="Create Post" arrow>
+          <div id="post" className="z-20 fixed bottom-7 right-80 rounded-full shadow-xl bg-green-600 pr-4 pl-3 py-2">
+              <button onClick={post} className="text-3xl font-black text-white font-bold text-center"><i className="fa fa-paper-plane"></i></button>
+          </div>
+      </Tooltip>
       <div
         style={{ justifyContent: open ? "space-between" : "space-around" }}
         className="w-full flex bg-[#0F2A36]"
@@ -126,15 +143,15 @@ function HomePageScreen() {
           </div>
 
 
-          {joinedCommunities.map((community)=>(
-             <div key={community.id} className="w-2/3 bg-[#0B222C] text-white py-2 text-center text-xl rounded-lg w-full mb-4 cursor-pointer">
-             {community.name}
-           </div>
+          {joinedCommunities.map((community) => (
+            <div key={community.id} className="w-2/3 bg-[#0B222C] text-white py-2 text-center text-xl rounded-lg w-full mb-4 cursor-pointer">
+              {community.name}
+            </div>
           ))}
         </div>
 
         <div className={`${open ? 'w-3/5' : 'w-4/5'} flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}>
-          
+
           {postsData.map((post) => (
             <div className="font-Inter w-2/3 rounded-lg bg-[#0B222C] py-3 mb-5">
               <div className="title text-[#ACACAC] py-2 px-4">
@@ -151,6 +168,8 @@ function HomePageScreen() {
               )}
             </div>
           ))}
+
+
 
           {/* <div className="w-2/3 rounded-lg bg-[#0B222C] py-3 mb-5 border border-white">
             <div className="title text-[#ACACAC] py-2 px-4">
@@ -232,6 +251,7 @@ function HomePageScreen() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
