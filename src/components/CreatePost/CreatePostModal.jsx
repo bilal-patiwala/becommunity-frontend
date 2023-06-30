@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import "./CreatePost.css";
 import "./CreatePostModal.css"
 import AuthContext from "../../context/AuthContext";
-function CreatePostModal(closeModal) {
+function CreatePostModal({closeModal}) {
     const [communities, setCommunities] = useState([]);
     const { authToken } = useContext(AuthContext);
 
@@ -73,8 +73,7 @@ function CreatePostModal(closeModal) {
                         </button>
                     </div>
 
-                    <div className="bg-[#0F2A36] rounded-lg w-full model-main-container pb-3">
-                        <div className="bg-[#0F2A36]">
+                    <div className="bg-[#0F2A36] rounded-lg w-full model-main-container pb-3 px-2">
                             <div className="font-Inter text-white">
                                 <div className="pl-[16px] pt-4 pb-2 text-2xl">Create New Post</div>
                                 <form onSubmit={handleSubmit(handleCreatePost)}>
@@ -117,7 +116,7 @@ function CreatePostModal(closeModal) {
                                     </div>
                                     <div className="ml-3 mt-4">
                                         <button
-                                            className="bg-[#fff] p-2 rounded-lg text-black"
+                                            className="bg-[#fff] p-2 rounded-lg text-black hover:bg-green-500"
                                             type="submit"
                                         >
                                             Submit
@@ -125,7 +124,6 @@ function CreatePostModal(closeModal) {
                                     </div>
                                 </form>
                             </div>
-                        </div>
 
                     </div>
                 </div>

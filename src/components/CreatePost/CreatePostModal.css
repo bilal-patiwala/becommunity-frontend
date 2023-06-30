@@ -1,5 +1,5 @@
 .ModalContainer {
-    height: 80vh;
+    min-height: 80vh;
 }
 .model-main-container{
     height: 100%;
