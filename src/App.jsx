@@ -10,6 +10,7 @@ import ChooseInterest from "./pages/ChooseInterest/ChooseInterest";
 import Recommendation from "./pages/Recommendation/Recommendation";
 import CreatePost from "./components/CreatePost/CreatePost";
 import CreateCommunity from "./components/CreateCommunity/CreateCommunity";
+import UserProfile from "./components/UserProfile/UserProfile";
 function App() {
   return (
     <div>
@@ -26,7 +27,7 @@ function App() {
             <Route path="/recommendations" element={<Recommendation/>}/>
             <Route path="/create-post" element={<CreatePost/>}/>
             <Route path="/create-community" element={<CreateCommunity/>}/>
-            
+            <Route path="/MyProfile" element={<UserProfile/>}/>
           </Routes>
         </AuthProvider>
       </BrowserRouter>
