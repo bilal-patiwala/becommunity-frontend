@@ -37,7 +37,7 @@ function CreateCommunity() {
     let formdata = new FormData();
     formdata.append("name", data["community-name"]);
     formdata.append("description", data["community-description"]);
-    formdata.append("community-category", selectedCategories);
+    formdata.append("community-category", JSON.stringify(selectedCategories));
     formdata.append("image-url", data["community-image"][0]);
     for (let [key, value] of formdata.entries()) {
       console.log(value);
