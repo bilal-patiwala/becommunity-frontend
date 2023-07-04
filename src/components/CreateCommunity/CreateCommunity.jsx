@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import "./CreateCommunity.css";
-import Select from "react-select";
-
+import CreatableSelect from 'react-select/creatable';
 function CreateCommunity() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -27,7 +26,6 @@ function CreateCommunity() {
     const categoryValues = selectedOptions.map((option) => option.value);
     setSelectedCategories(categoryValues);
   }
-
   const {
     register,
     handleSubmit,
@@ -75,7 +73,7 @@ function CreateCommunity() {
             />
           </div>
           <div className="community-category">
-            <Select
+            <CreatableSelect
               className="select-categories"
               options={categories.map((category) => ({
                 value: category.name,
