@@ -8,6 +8,10 @@ import CreatePostModal from "../CreatePost/CreatePostModal";
 import Dropdown from "./Dropdown";
 import NotifyModal from "./NotifyModal";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import Homeicon from "../../assets/icons8-home.svg";
+import Topicon from "../../assets/arrow-up-circle.svg";
+import Newicon from "../../assets/coffee.svg";
+import communityTestImg from "../../assets/maksim-istomin-BSx5n20J-qg-unsplash.jpg";
 function HomePageScreen() {
   const Navigate = useNavigate();
   const dropRef = useRef();
@@ -105,11 +109,7 @@ function HomePageScreen() {
               className="text-2xl absolute left-5 top-4 cursor-pointer"
             >
               <i
-                className={
-                  open
-                    ? "fa fa-close text-white"
-                    : "fa-solid fa-bars text-white"
-                }
+                className="fa-solid fa-bars text-white"
               ></i>
             </div>
 
@@ -211,14 +211,23 @@ function HomePageScreen() {
             style={{ display: open ? "block" : "none" }}
             className="w-1/5 font-Inter h-screen flex flex-col items-center shadow-xl z-10 p-2 bg-[#0B222C] left-0 top-10 sticky overflow-y-auto"
           >
-            <div className="w-2/3 bg-[#0F2A36] text-white py-2 text-center text-xl rounded-lg w-full mt-4 mb-4 cursor-pointer">
-              Home
+            <div className="w-2/3 flex flex-start items-center bg-[#0B222C] hover:bg-[#0F2A36] text-white py-2 text-center text-xl rounded-lg w-full mt-4 mb-4 cursor-pointer">
+              <div className="ml-2 mr-4">
+                <img className="sidebar-icon" src={Homeicon} alt="" />
+              </div>
+              <div>Home</div>
             </div>
-            <div className="w-2/3 bg-[#0B222C] text-white py-2 text-center text-xl rounded-lg w-full mb-4 cursor-pointer">
-              Top
+            <div className="w-2/3 flex flex-start items-center bg-[#0B222C] hover:bg-[#0F2A36] text-white py-2 text-center text-xl rounded-lg w-full mb-4 cursor-pointer">
+              <div className="ml-2 mr-4">
+                <img className="sidebar-icon" src={Topicon} alt="" />
+              </div>
+              <div>Top</div>
             </div>
-            <div className="w-2/3 bg-[#0B222C] text-white py-2 text-center text-xl rounded-lg w-full mb-4 cursor-pointer">
-              New
+            <div className="w-2/3 flex flex-start items-center bg-[#0B222C] hover:bg-[#0F2A36] text-white py-2 text-center text-xl rounded-lg w-full mb-4 cursor-pointer">
+              <div className="ml-2 mr-4">
+                <img className="sidebar-icon" src={Newicon} alt="" />
+              </div>
+              <div>New</div>
             </div>
             <div className="w-2/3 border-b-2 border-white text-white py-2 text-left text-xl w-full mb-4">
               Joined
@@ -232,9 +241,16 @@ function HomePageScreen() {
                 {joinedCommunities.map((community) => (
                   <div
                     key={community.id}
-                    className="w-2/3 bg-[#0B222C] text-white py-2 text-center text-xl rounded-lg w-full mb-4 cursor-pointer"
+                    className="flex flex-start items-center w-2/3 bg-[#0B222C] hover:bg-[#0F2A36] text-white py-2 text-center text-lg rounded-lg w-full mb-4 cursor-pointer"
                   >
-                    {community.name}
+                    <div style={{ marginLeft: "2px" }} className="mr-2">
+                      <img
+                        className="community-image"
+                        src={communityTestImg}
+                        alt=""
+                      />
+                    </div>
+                    <div>{community.name}</div>
                   </div>
                 ))}
               </div>

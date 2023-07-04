@@ -6,7 +6,7 @@ function NotifyModal() {
   return (
     <>
       <div className='notify z-50 absolute w-96 h-96 px-3 pb-3 bg-[#0B222C] flex-col justify-center rounded-lg overflow-y-auto text-left text-white font-Inter'>
-        <div className='py-2 border-b-2 border-gray-100 text-gray-100 text-left px-1 text-xl mb-4'>Notifications</div>
+        <div className='py-2 border-b-2 border-gray-100 text-gray-100 text-left px-1 text-xl mb-4 mt-2 font-semibold'>Notifications</div>
         <div className='mb-5'>
         <span className='font-bold'>Community Event Reminder:</span> Join us for a fun-filled day of activities this Saturday at the local park.!
         </div>
