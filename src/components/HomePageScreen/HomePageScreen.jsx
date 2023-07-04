@@ -6,11 +6,14 @@ import userImg from "../../assets/icons8-male-user-50.png";
 import AuthContext from "../../context/AuthContext";
 import CreatePostModal from "../CreatePost/CreatePostModal";
 import Dropdown from "./Dropdown";
+import NotifyModal from "./NotifyModal";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 function HomePageScreen() {
   const Navigate = useNavigate();
   const dropRef = useRef();
+  const notifyRef = useRef();
   const [drop, setDrop] = useState(false);
+  const [notifyModal, setNotifyModal] = useState(false);
   const { authToken } = useContext(AuthContext);
   const [postsData, setPostsData] = useState([]);
   const [joinedCommunities, setJoinedCommunities] = useState([]);
@@ -28,7 +31,19 @@ function HomePageScreen() {
     };
 
     document.addEventListener("mousedown", close);
+
     return () => document.removeEventListener("mousedown", close);
+  });
+
+  
+  useEffect(() => {
+    const closeNotify = (e) => {
+      if (!notifyRef.current.contains(e.target)) setNotifyModal(false);
+    };
+
+    document.addEventListener("mousedown", closeNotify);
+
+    return () => document.removeEventListener("mousedown", closeNotify);
   });
 
   const get_post = async () => {
@@ -121,9 +136,25 @@ function HomePageScreen() {
             </div>
 
             <div className="w-1/4 flex items-center justify-end">
+              <Tooltip className="transition delay-40 ease-in duration-400 text-black" title={!notifyModal?"Notifications":""} placement='left' arrow>
+              <div onClick={() => setNotifyModal(!notifyModal)} ref={notifyRef} className="mx-5 cursor-pointer">
+                {
+                  !notifyModal ? 
+                  <div className="relative">
+                    <i class="fa-regular fa-bell text-white text-2xl"></i>
+                    <h2 className="absolute fixed top-0 left-4 text-sm text-white bg-red-500 px-1 rounded-full">3</h2>
+                  </div>
+                  :
+                  <i class="bell fa-solid fa-bell text-white text-2xl"></i>
+                }
+                
+                {notifyModal && <NotifyModal />}
+              </div>
+                </Tooltip>
+
               <div
                 id="create"
-                className="flex w-fit h-fit px-2 pb-2 items-center justify-center text-center rounded-lg mr-0"
+                className="flex w-fit h-fit px-2 pb-2 items-center justify-center text-center rounded-lg mr-5"
               >
                 <Tooltip
                   className="transition delay-40 ease-in duration-400 text-black"
