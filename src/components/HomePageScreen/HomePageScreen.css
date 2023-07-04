@@ -10,9 +10,7 @@
     font-size: 18px;
     font-family: 'Inter', 'sans-serif';
 }
-<<<<<<< HEAD
 
-=======
 .sidebar-icon{
     height: 28px;
     width: 28px;
@@ -22,7 +20,6 @@
     height: 48px;
     width: 48px;
 }
->>>>>>> 241b573d8cf4fe2fb46ede9c561a08ea10782bec
 .bell {
     animation: rotate 0.2s ease-in-out;
 }
@@ -33,10 +30,7 @@
         50% { transform: rotate(0deg);}
         75% { transform: rotate(-30deg);}
         100% { transform: rotate(0deg) }
-<<<<<<< HEAD
-=======
 }
 .post-div:hover{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
->>>>>>> 241b573d8cf4fe2fb46ede9c561a08ea10782bec
 }
