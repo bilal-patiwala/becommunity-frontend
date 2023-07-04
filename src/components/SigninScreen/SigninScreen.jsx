@@ -22,22 +22,16 @@ function SigninScreen() {
     validateEmail(inputValue);
   };
   const { signupUser } = useContext(AuthContext);
-  const Signin = (data) => {
-    setLoading(true);
-    if (
-      data.username !== "" &&
-      data.password !== "" &&
-      data.email !== "" &&
-      data.name !== ""
-    ) {
-      signupUser(data.email, data.username, data.name, data.password);
+  const Signin = async (data) => {
+    if (data.username !== "" && data.password !== "" && data.email !== "" && data.name !== "") {
+      setLoading(true);
+      let response = await signupUser(data.email, data.username, data.name, data.password);
+      setLoading(false);
     }
-    setLoading(false);
   };
   const {
     register,
     handleSubmit,
-    trigger,
     formState: { errors },
   } = useForm();
   return (
@@ -136,7 +130,7 @@ function SigninScreen() {
                     )}
                   </div>
                   <button type="submit" className="w-[90%] login-btn">
-                    <div className="  bg-[#03C988] hover:bg-[#08a36f] text-center font-semibold text-md p-2 rounded-[8px]">
+                    <div className="bg-[#03C988] hover:bg-[#08a36f] text-center font-semibold text-md p-2 rounded-[8px]">
                     {loading ? (
                         <LoadingSpinner height="18px" width="18px" />
                       ) : (
