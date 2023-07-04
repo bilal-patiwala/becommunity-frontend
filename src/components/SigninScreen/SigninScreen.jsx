@@ -83,7 +83,7 @@ function SigninScreen() {
                     <input
                       type="text"
                       id="name"
-                      className="name-input"
+                      className="name-signin-input"
                       {...register("name", { required: "Name is required" })}
                       placeholder="Name"
                     />

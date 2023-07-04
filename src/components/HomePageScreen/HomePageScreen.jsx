@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
 import "./HomePageScreen.css";
-import userImg from "../../assets/WhatsApp Image 2022-04-29 at 5.15.34 PM.jpeg";
+import userImg from "../../assets/icons8-male-user-50.png";
 import AuthContext from "../../context/AuthContext";
 import CreatePostModal from "../CreatePost/CreatePostModal";
 import Dropdown from "./Dropdown";
@@ -254,7 +254,7 @@ function HomePageScreen() {
               <div className="flex flex-col justify-center items-center">
                 {" "}
                 {postsData.map((post) => (
-                  <div className="font-Inter w-2/3 rounded-lg bg-[#0B222C] py-3 mb-5">
+                  <div className="font-Inter w-2/3 rounded-lg bg-[#0B222C] py-3 mb-5 post-div">
                     <div className="title text-[#ACACAC] py-2 px-4">
                       {post.post_creator} | {post.community}
                     </div>
