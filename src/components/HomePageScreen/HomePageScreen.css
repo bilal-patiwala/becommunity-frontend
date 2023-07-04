@@ -10,7 +10,6 @@
     font-size: 18px;
     font-family: 'Inter', 'sans-serif';
 }
-<<<<<<< HEAD
 
 .bell {
     animation: rotate 0.2s ease-in-out;
@@ -22,8 +21,4 @@
         50% { transform: rotate(0deg);}
         75% { transform: rotate(-30deg);}
         100% { transform: rotate(0deg) }
-=======
-.post-div:hover{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
->>>>>>> 450911f0dc4c4eb71546922547c7a3bee9ed8527
 }
