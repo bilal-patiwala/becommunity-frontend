@@ -10,18 +10,19 @@
     font-size: 18px;
     font-family: 'Inter', 'sans-serif';
 }
-.post-div:hover{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-.sidebar-icon{
-    height: 24px;
-    width: 24px;
-    fill: white;
-    border-color: white;
+<<<<<<< HEAD
+
+.bell {
+    animation: rotate 0.2s ease-in-out;
 }
 
-.community-image{
-    border-radius: 50%;
-    height: 48px;
-    width: 48px;
+@keyframes rotate {
+        0% { transform: rotate(0deg);}
+        25% { transform: rotate(30deg);}
+        50% { transform: rotate(0deg);}
+        75% { transform: rotate(-30deg);}
+        100% { transform: rotate(0deg) }
+=======
+.post-div:hover{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
