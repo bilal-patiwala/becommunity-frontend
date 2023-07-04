@@ -109,11 +109,7 @@ function HomePageScreen() {
               className="text-2xl absolute left-5 top-4 cursor-pointer"
             >
               <i
-                className={
-                  open
-                    ? "fa fa-close text-white"
-                    : "fa-solid fa-bars text-white"
-                }
+                className="fa-solid fa-bars text-white"
               ></i>
             </div>
 
