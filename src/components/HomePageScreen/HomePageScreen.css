@@ -16,8 +16,8 @@
 }
 .community-image{
     border-radius: 50%;
-    height: 48px;
-    width: 48px;
+    height: 38px;
+    width: 38px;
 }
 .bell {
     animation: rotate 0.2s ease-in-out;
