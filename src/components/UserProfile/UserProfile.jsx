@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import "./UserProfile.css";
 import AuthContext from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 function UserProfile() {
   const [userData, setUserData] = useState([]);
+  const Navigate = useNavigate();
   const [updatedFile, setUpdatedFile] = useState(null);
   const [newDOB, setNewDOB] = useState("");
   const [newBio, setNewBio] = useState("");
@@ -13,7 +15,7 @@ function UserProfile() {
   useEffect(() => {
     get_user_data();
   }, []);
-
+  const userInfo = { newDOB, newBio };
   const get_user_data = async () => {
     let response = await fetch("http://127.0.0.1:8000/get_user_profile/", {
       method: "GET",
@@ -53,24 +55,27 @@ function UserProfile() {
     setRecoveryEmail(recoveryEmail);
   };
 
-  const handleEditProfile = (event) => {
+  const handleEditProfile = async (event) => {
     event.preventDefault();
     let formdata = new FormData();
     formdata.append("image", updatedFile);
-    formdata.append("dob", newDOB);
-    formdata.append("bio", newBio);
-    formdata.append("recovery-email", recoveryEmail);
+    formdata.append("dob", userInfo.newDOB);
+    formdata.append("bio", userInfo.newBio);
 
     for (let [key, value] of formdata.entries()) {
-      console.log(key, value);
+      console.log(value);
     }
 
-    // let response = await fetch("http://127.0.0.1:8000/edit_profile", {
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: `Bearer ${authToken.refresh}`,
-    //   },
-    // });
+    let response = await fetch("http://127.0.0.1:8000/edit_profile/", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${authToken.refresh}`,
+      },
+      body:formdata,
+    });
+    let data = await response.json()
+    console.log(data);
+    Navigate("/MyProfile")
   };
 
   return (

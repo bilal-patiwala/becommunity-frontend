@@ -3,7 +3,7 @@ import "./HomepageScreen.css";
 function HomepageRightSidebar() {
   return (
     <>
-        <div className="w-1/5 h-screen font-Inter flex flex-col shadow-xl z-10 p-2 bg-[#0B222C] rounded-lg sticky right-0 top-10">
+        <div className="w-1/5 h-screen font-Inter flex flex-col shadow-xl z-10 p-2 bg-[#0B222C] rounded-lg sticky overflow-y-auto right-0 top-10">
             <p className="text-center text-white mt-5 font-medium text-xl">
               Popular Communities
             </p>

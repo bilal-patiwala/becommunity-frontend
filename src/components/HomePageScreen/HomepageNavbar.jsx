@@ -5,12 +5,23 @@ import "./HomePageScreen.css";
 import userImg from "../../assets/icons8-male-user-50.png";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
-function HomepageNavbar({open,setOpen}) {
+import AuthContext from "../../context/AuthContext";
+function HomepageNavbar({ open, setOpen }) {
   const Navigate = useNavigate();
   const dropRef = useRef();
   const notifyRef = useRef();
   const [drop, setDrop] = useState(false);
   const [notifyModal, setNotifyModal] = useState(false);
+  const [userData, setUserData] = useState([]);
+  const { get_user } = useContext(AuthContext);
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+  const getCurrentUser = async () => {
+    let data = await get_user();
+    console.log(data);
+    setUserData(data);
+  };
 
   useEffect(() => {
     const close = (e) => {
@@ -32,7 +43,6 @@ function HomepageNavbar({open,setOpen}) {
     return () => document.removeEventListener("mousedown", closeNotify);
   });
 
-  
   const navigatetoCreateCommunity = () => {
     Navigate("/create-community");
   };
@@ -123,11 +133,23 @@ function HomepageNavbar({open,setOpen}) {
               ref={dropRef}
               className="flex w-14 h-14 items-center justify-center mx-2"
             >
-              <button className="rounded-full object-fit mx-1 bg-white">
-                <img src={userImg} className="rounded-full" alt="userimg" />
+              <button className="user-image-navbar bg-white">
+                {userData.image ? (
+                  <img
+                    src={`data:image/jpeg;base64,${userData.image}`}
+                    className="user-image-navbar"
+                    alt="userimg"
+                  />
+                ) : (
+                  <img
+                    src={userImg}
+                    className="user-image-navbar"
+                    alt="userimg"
+                  />
+                )}
                 {drop && <Dropdown />}
               </button>
-              <i className="fa fa-caret-down text-white"></i>
+              <i className="fa fa-caret-down text-white ml-2"></i>
             </div>
           </div>
         </nav>

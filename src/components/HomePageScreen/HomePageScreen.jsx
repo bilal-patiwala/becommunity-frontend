@@ -20,25 +20,6 @@ function HomePageScreen() {
     get_post();
   }, []);
 
-  useEffect(() => {
-    const close = (e) => {
-      if (!dropRef.current.contains(e.target)) setDrop(false);
-    };
-
-    document.addEventListener("mousedown", close);
-
-    return () => document.removeEventListener("mousedown", close);
-  });
-
-  useEffect(() => {
-    const closeNotify = (e) => {
-      if (!notifyRef.current.contains(e.target)) setNotifyModal(false);
-    };
-
-    document.addEventListener("mousedown", closeNotify);
-
-    return () => document.removeEventListener("mousedown", closeNotify);
-  });
 
   const get_post = async () => {
     setPostLoading(true);
@@ -68,24 +49,6 @@ function HomePageScreen() {
 
       <div className="bg-[#0F2A36]">
         <HomepageNavbar open={open} setOpen={setOpen} />
-        <Tooltip
-          className="transition delay-40 ease-in duration-400 text-black"
-          title="Create Post"
-          arrow
-        >
-          <div
-            id="post"
-            className="font-Inter z-20 fixed bottom-7 right-80 rounded-full shadow-xl bg-green-600 pr-4 pl-3 py-2"
-          >
-            <button
-              onClick={post}
-              className="flex flex-row items-center text-xl font-black text-white font-bold text-center"
-            >
-              <i className="fa fa-plus mr-2"></i>
-              <div>Post</div>
-            </button>
-          </div>
-        </Tooltip>
 
         <div
           style={{ justifyContent: open ? "space-between" : "space-around" }}
@@ -100,15 +63,33 @@ function HomePageScreen() {
               open ? "w-3/5" : "w-4/5"
             } flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
           >
+            <Tooltip
+              className="transition delay-40 ease-in duration-400 text-black"
+              title="Create Post"
+              arrow
+            >
+              <div
+                id="post"
+                className="font-Inter z-20 fixed bottom-7 right-80 rounded-full shadow-xl bg-green-600 pr-4 pl-3 py-2"
+              >
+                <button
+                  onClick={post}
+                  className="flex flex-row items-center text-xl font-black text-white font-bold text-center"
+                >
+                  <i className="fa fa-plus mr-2"></i>
+                  <div>Post</div>
+                </button>
+              </div>
+            </Tooltip>
             {postLoading ? (
               <div className="flex justify-center items-center mt-8">
                 <LoadingSpinner height="60px" width="60px" />
               </div>
             ) : (
-              <div className="flex flex-col justify-center items-center">
+              <div className="flex flex-col w-full justify-center items-center">
                 {" "}
                 {postsData.map((post) => (
-                  <div className="font-Inter w-2/3 rounded-lg bg-[#0B222C] py-3 mb-5 post-div">
+                  <div className="font-Inter w-2/3 rounded-lg bg-[#0B222C] py-3 mb-4 post-div">
                     <div className="title text-[#ACACAC] py-2 px-4">
                       {post.post_creator} | {post.community}
                     </div>
@@ -121,7 +102,7 @@ function HomePageScreen() {
                     {post.image && (
                       <div>
                         <img
-                          src={`http://127.0.0.1:8000${post.image}`}
+                          src={`data:image/jpeg;base64,${post.image}`}
                           alt=""
                         />
                       </div>

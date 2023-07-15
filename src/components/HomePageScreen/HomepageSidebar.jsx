@@ -5,12 +5,13 @@ import Newicon from "../../assets/coffee.svg";
 import communityTestImg from "../../../public/infoImage3.jpg";
 import AuthContext from "../../context/AuthContext";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { useNavigate } from "react-router-dom";
 
-function HomepageSidebar({open}) {
+function HomepageSidebar({ open }) {
   const [joinedCommunities, setJoinedCommunities] = useState([]);
   const [communityLoading, setCommunityLoading] = useState(false);
   const { authToken } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   useEffect(() => {
     get_joined_communities();
   }, []);
@@ -31,11 +32,16 @@ function HomepageSidebar({open}) {
     setJoinedCommunities(data);
     setCommunityLoading(false);
   };
+
+  const handleCommunityClick = (id) => {
+    navigate("/community", { state: { id} });
+    console.log(id);
+  };
   return (
     <>
       <div
         style={{
-          width: open ? "260px" : "86px",
+          width: open ? "240px" : "86px",
           transition: "width 0.15s ease-in-out",
         }}
         className="w-1/5 font-Inter h-screen flex flex-col items-center shadow-xl z-10 p-2 bg-[#0B222C] left-0 top-10 sticky overflow-y-auto"
@@ -86,6 +92,7 @@ function HomepageSidebar({open}) {
             {joinedCommunities.map((community, index) => (
               <div
                 key={community.id}
+                onClick={() => handleCommunityClick(community.id)}
                 style={{
                   justifyContent: open ? "flex-start" : "center",
                   marginTop: !open && index === 0 ? "14px" : "0px",
@@ -106,7 +113,9 @@ function HomepageSidebar({open}) {
                   />
                 </div>
                 <div style={{ display: open ? "block" : "none" }}>
-                  {community.name}
+                  {community.name.length > 18
+                    ? community.name.substring(0, 18) + "..."
+                    : community.name}
                 </div>
               </div>
             ))}
