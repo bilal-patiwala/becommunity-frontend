@@ -1,0 +1,9 @@
+.community-header-image{
+    border-radius: 50%;
+    height: 42px;
+    width: 42px;
+}
+.community-nav-links{
+    text-decoration: none;
+    color: white;
+}

@@ -11,6 +11,7 @@ import Recommendation from "./pages/Recommendation/Recommendation";
 import CreatePost from "./components/CreatePost/CreatePost";
 import CreateCommunity from "./components/CreateCommunity/CreateCommunity";
 import UserProfile from "./components/UserProfile/UserProfile";
+import CommunityPage from "./components/CommunityPage/CommunityPage";
 function App() {
   return (
     <div>
@@ -23,11 +24,12 @@ function App() {
 
             <Route path="/login" element={<Login />} />
             <Route path="/signin" element={<Signin />} />
-            <Route path="/chooseinterest" element={<ChooseInterest/>}/>
-            <Route path="/recommendations" element={<Recommendation/>}/>
-            <Route path="/create-post" element={<CreatePost/>}/>
-            <Route path="/create-community" element={<CreateCommunity/>}/>
-            <Route path="/MyProfile" element={<UserProfile/>}/>
+            <Route path="/chooseinterest" element={<ChooseInterest />} />
+            <Route path="/recommendations" element={<Recommendation />} />
+            <Route path="/create-post" element={<CreatePost />} />
+            <Route path="/create-community" element={<CreateCommunity />} />
+            <Route path="/MyProfile" element={<UserProfile />} />
+            <Route path="/community" element={<CommunityPage />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
