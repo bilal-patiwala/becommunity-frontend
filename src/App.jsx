@@ -29,7 +29,7 @@ function App() {
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="/create-community" element={<CreateCommunity />} />
             <Route path="/MyProfile" element={<UserProfile />} />
-            <Route path="/community" element={<CommunityPage />} />
+            <Route path="/community/:id" element={<CommunityPage />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

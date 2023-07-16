@@ -34,7 +34,8 @@ function HomepageSidebar({ open }) {
   };
 
   const handleCommunityClick = (id) => {
-    navigate("/community", { state: { id} });
+    localStorage.setItem('communityId', id);
+    navigate(`/community/${id}`, { state: { id} });
     console.log(id);
   };
   return (
