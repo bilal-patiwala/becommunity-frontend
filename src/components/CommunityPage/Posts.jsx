@@ -1,18 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import { useLocation } from "react-router-dom";
+import { useLocation,useParams } from "react-router-dom";
 function Posts() {
-  const location = useLocation();
-  const community_id = location.state.id;
+  // const location = useLocation();
+  // const community_id = location.state.id;
   const [communityPosts, setCommunityPosts] = useState([]);
   const { authToken } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-    const active_id = community_id;
+  const [communityId, setCommunityId] = useState('');
+
+  useEffect(() => {
+    const storedId = localStorage.getItem('communityId');
+    if (storedId) {
+      setCommunityId(storedId);
+    }
+  }, []);
   const get_community_posts = async () => {
     setLoading(true);
     let response = await fetch(
-      `http://localhost:8000/get_one_community_info/${community_id}/`,
+      `http://localhost:8000/get_one_community_info/${communityId}/`,
       {
         method: "GET",
         headers: {
@@ -28,7 +35,7 @@ function Posts() {
 
   useEffect(() => {
     get_community_posts();
-  }, [community_id]);
+  }, [communityId]);
   return (
     <div className="text-white flex justify-center">
       <div

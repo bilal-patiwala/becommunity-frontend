@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import { Routes, useNavigate } from "react-router-dom";
+import { Routes, useNavigate, useParams } from "react-router-dom";
 import "../HomePageScreen/HomePageScreen.css";
 import "./CommunityPage.css";
 import AuthContext from "../../context/AuthContext";
@@ -12,8 +12,42 @@ import { NavLink, Route } from "react-router-dom";
 import Posts from "./Posts";
 import Chats from "./Chats";
 function CommunityPage() {
-  const { authToken } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [communityName, setCommunityName] = useState("");
+  const [communityImage, setCommunityImage] = useState([]);
+  const [communityPosts, setCommunityPosts] = useState([]);
+  const { authToken } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const [communityId, setCommunityId] = useState('');
+
+  useEffect(() => {
+    const storedId = localStorage.getItem('communityId');
+    if (storedId) {
+      setCommunityId(storedId);
+    }
+  }, []);
+  const get_community_posts = async () => {
+    setLoading(true);
+    let response = await fetch(
+      `http://localhost:8000/get_one_community_info/${communityId}/`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${authToken.refresh}`,
+        },
+      }
+    );
+    let data = await response.json();
+    console.log(data);
+    setCommunityPosts(data.posts);
+    setCommunityName(data.community.name)
+    setCommunityImage(data.community.image)
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    get_community_posts();
+  }, [communityId]);
   const [activeLink, setActiveLink] = useState("posts");
   const handleNavLinkClick = (link) => {
     setActiveLink(link);
@@ -35,13 +69,13 @@ function CommunityPage() {
             <div className="border-[#304953] border-b-2 font-Inter text-white flex flex-row">
               <div className="mt-3 mb-3 mx-4">
                 <img
-                  src={communityTestImg}
+                  src={`data:image/jpeg;base64,${communityImage}`}
                   className="community-header-image"
                   alt=""
                 />
               </div>
               <div className="my-[24px] mb-3 text-lg font-semibold">
-                Gaming Enthusiasts
+                {communityName}
               </div>
             </div>
             <div className="flex justify-around w-full font-Inter font-medium text-white mt-[12px] text-md mx-3">
