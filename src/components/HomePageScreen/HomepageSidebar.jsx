@@ -143,7 +143,7 @@ function HomepageSidebar({ open }) {
                 >
                   <img
                     className="community-image"
-                    src={communityTestImg}
+                    src={`data:image/jpeg;base64,${community.image}`}
                     alt=""
                   />
                 </div>
