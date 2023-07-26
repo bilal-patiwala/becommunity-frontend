@@ -12,6 +12,7 @@ import CreatePost from "./components/CreatePost/CreatePost";
 import CreateCommunity from "./components/CreateCommunity/CreateCommunity";
 import UserProfile from "./components/UserProfile/UserProfile";
 import CommunityPage from "./components/CommunityPage/CommunityPage";
+import PostPage from "./components/PostPage/PostPage";
 function App() {
   return (
     <div>
@@ -30,6 +31,7 @@ function App() {
             <Route path="/create-community" element={<CreateCommunity />} />
             <Route path="/MyProfile" element={<UserProfile />} />
             <Route path="/community/:id" element={<CommunityPage />} />
+            <Route path="/post/:id" element={<PostPage />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

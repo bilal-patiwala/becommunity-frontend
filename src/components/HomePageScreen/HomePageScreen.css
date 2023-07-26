@@ -22,11 +22,16 @@
 .bell {
   animation: rotate 0.2s ease-in-out;
 }
-.post-div:hover {
-  border: 1px solid;
-  border-color: #304953;
-  /* color: #0b2936; */
+.post-div {
+  border: 1px solid transparent;
 }
+.nothing{
+  color: #098fc9;
+}
+.post-div:hover {
+  border-color: #304953;
+}
+
 .user-image-navbar {
   border-radius: 50%;
   height: 40px;
