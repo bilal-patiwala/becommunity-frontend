@@ -35,9 +35,14 @@ function HomepageSidebar({ open }) {
 
   const handleCommunityClick = (id) => {
     localStorage.setItem('communityId', id);
-    navigate(`/community/${id}`, { state: { id} });
+    navigate(`/community/${id}`, { state: {id} });
     console.log(id);
   };
+
+  const navigateHome = () => {
+    navigate('/');
+  };
+
   return (
     <>
       <div
@@ -48,6 +53,7 @@ function HomepageSidebar({ open }) {
         className="w-1/5 font-Inter h-screen flex flex-col items-center shadow-xl z-10 p-2 bg-[#0B222C] left-0 top-10 sticky overflow-y-auto"
       >
         <div
+          onClick={()=>navigateHome()}
           style={{ justifyContent: open ? "flex-start" : "center" }}
           className="w-2/3 flex items-center bg-[#0B222C] hover:bg-[#0F2A36] text-white py-2 text-center text-md rounded-lg w-full my-3 cursor-pointer"
         >
@@ -85,9 +91,37 @@ function HomepageSidebar({ open }) {
           Joined
         </div>
         {communityLoading ? (
-          <div className="flex justify-center items-center mt-8">
-            <LoadingSpinner height="30px" width="30px" />
+          <>
+          <div class="shadow rounded-md p-4 w-full mx-auto mb-7">
+          <div class="animate-pulse flex space-x-4">
+            <div class="rounded-full bg-slate-200 h-10 w-10"></div>
+            <div class="flex-1 space-y-2 py-2">
+              <div class="h-2 bg-slate-200 rounded"></div>
+              <div class="space-y-3">
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="h-2 bg-slate-200 rounded col-span-2"></div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+        <div class="shadow rounded-md p-4 w-full mx-auto mb-7">
+          <div class="animate-pulse flex space-x-4">
+            <div class="rounded-full bg-slate-200 h-10 w-10"></div>
+            <div class="flex-1 space-y-2 py-2">
+              <div class="h-2 bg-slate-200 rounded"></div>
+              <div class="space-y-3">
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="h-2 bg-slate-200 rounded col-span-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+            // {/* <LoadingSpinner height="30px" width="30px" /> */}
+
+
         ) : (
           <>
             {joinedCommunities.map((community, index) => (
