@@ -1,0 +1,18 @@
+.user-profile-img{
+    border-radius: 50%;
+    height: 240px;
+    width: 240px;
+}
+
+.camera-img{
+    background-color: #03C988;
+    border-radius: 50%;
+    height: 48px;
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.new{
+    color: #0e394b;
+}

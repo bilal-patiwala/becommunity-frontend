@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./UserProfile.css";
 import AuthContext from "../../context/AuthContext";
-import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import cameraImg from "../../assets/camera.svg";
 function UserProfile() {
   const [userData, setUserData] = useState([]);
   const Navigate = useNavigate();
   const [updatedFile, setUpdatedFile] = useState(null);
   const [newDOB, setNewDOB] = useState("");
+  const [loading, setLoading] = useState(false);
   const [newBio, setNewBio] = useState("");
   const [recoveryEmail, setRecoveryEmail] = useState("");
   const [updatedImg, setUpdatedImg] = useState(null);
@@ -17,6 +19,7 @@ function UserProfile() {
   }, []);
   const userInfo = { newDOB, newBio };
   const get_user_data = async () => {
+    setLoading(true);
     let response = await fetch("http://127.0.0.1:8000/get_user_profile/", {
       method: "GET",
       headers: {
@@ -28,6 +31,8 @@ function UserProfile() {
     console.log(data);
     setUserData(data);
     setNewBio(data.bio);
+    setNewDOB(data.dob);
+    setLoading(false);
   };
 
   const handleImageUpload = (event) => {
@@ -58,7 +63,9 @@ function UserProfile() {
   const handleEditProfile = async (event) => {
     event.preventDefault();
     let formdata = new FormData();
-    formdata.append("image", updatedFile);
+    if (updatedFile !== null) {
+      formdata.append("image", updatedFile);
+    }
     formdata.append("dob", userInfo.newDOB);
     formdata.append("bio", userInfo.newBio);
 
@@ -71,49 +78,95 @@ function UserProfile() {
       headers: {
         Authorization: `Bearer ${authToken.refresh}`,
       },
-      body:formdata,
+      body: formdata,
     });
-    let data = await response.json()
+    let data = await response.json();
     console.log(data);
-    Navigate("/MyProfile")
+    Navigate("/MyProfile");
   };
 
   return (
     <div className="bg-[#0F2A36]">
-      <div className="font-Inter text-white p-4 text-2xl font-medium">
-        Edit your Profile
-      </div>
-      <div className="px-4">
-        {updatedImg ? (
-          <img height="400px" width="400px" src={updatedImg} alt="" />
-        ) : (
-          <img
-            height="400px"
-            width="400px"
-            src={`data:image/jpeg;base64,${userData.image}`}
-            alt=""
-          />
-        )}
+      {loading ? (
+        <div className="flex justify-center items-center pt-8">
+          <LoadingSpinner height="60px" width="60px" />
+        </div>
+      ) : (
+        <>
+          <div className="font-Inter text-white p-4 text-3xl font-semibold">
+            Edit your Profile
+          </div>
+          <div className="px-4">
+            {updatedImg ? (
+              <div className="mb-2">
+                <img
+                  className="user-profile-img"
+                  height="400px"
+                  width="400px"
+                  src={updatedImg}
+                  alt=""
+                />
+                <input type="file" onChange={handleImageUpload} />
+                <div className="camera-img">
+                  <img src={cameraImg} alt="" />
+                </div>
 
-        <form>
-          <input type="file" onChange={handleImageUpload} />
-          <br />
-          <input
-            type="date"
-            value={newDOB ? newDOB : userData.dob}
-            onChange={handleDOBChange}
-          />
-          <br />
-          <input type="text" value={newBio} onChange={handleBioChange} />
-          <br />
-
-          <br />
-          <input type="email" onChange={handleRecoveryEmail} />
-          <button type="submit" onClick={handleEditProfile}>
-            Submit
-          </button>
-        </form>
-      </div>
+                <br />
+              </div>
+            ) : (
+              <div className="mb-2">
+                <img
+                  className="user-profile-img"
+                  height="400px"
+                  width="400px"
+                  src={`data:image/jpeg;base64,${userData.image}`}
+                  alt=""
+                />
+                <input type="file" onChange={handleImageUpload} />
+                <div className="camera-img">
+                  <img src={cameraImg} alt="" />
+                </div>
+                <br />
+              </div>
+            )}
+            <div className="mt-2 font-Inter">
+              <form>
+                <label className="font-medium text-xl text-white" htmlFor="dob">
+                  Birth Date
+                </label>
+                <br />
+                <input
+                  className="mt-2 mb-3 p-2 rounded-lg bg-[#0e394b] text-white text-lg"
+                  type="date"
+                  value={newDOB ? newDOB : userData.dob}
+                  onChange={handleDOBChange}
+                />
+                <br />
+                <label className="font-medium text-xl text-white" htmlFor="Bio">
+                  Bio
+                </label>
+                <br />
+                <textarea
+                  className="mt-2 mb-3 min-h-[60px] p-2 rounded-lg bg-[#0e394b] text-white text-lg"
+                  type="text"
+                  value={newBio}
+                  onChange={handleBioChange}
+                />
+                <br />
+                <button
+                  onClick={handleEditProfile}
+                  className="my-2 rounded-[12px] bg-[#03C988] hover:bg-[#08a36f]"
+                  type="submit"
+                >
+                  <div className="px-4 py-2 text-black font-Inter font-semibold">
+                    Save Changes
+                  </div>
+                </button>
+              </form>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

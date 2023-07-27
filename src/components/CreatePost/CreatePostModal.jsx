@@ -44,7 +44,9 @@ function CreatePostModal({ closeModal }) {
     formdata.append("title", data["post-title"]);
     formdata.append("description", data["post-description"]);
     formdata.append("community", data["post-community"]);
-    formdata.append("image-url", data["post-image"][0]);
+    if (data["post-image"][0] !== undefined) {
+      formdata.append("image-url", data["post-image"][0]);
+    }
     for (let [key, value] of formdata.entries()) {
       console.log(value);
     }
@@ -58,7 +60,7 @@ function CreatePostModal({ closeModal }) {
     });
     let responseData = await response.json();
     console.log(responseData);
-    closeModal(false);
+    closeModal();
   };
 
   return (
@@ -115,7 +117,7 @@ function CreatePostModal({ closeModal }) {
                   <input
                     className="post-image-input ml-3 mt-2"
                     type="file"
-                    {...register("post-image", { required: true })}
+                    {...register("post-image")}
                   />
                 </div>
                 <div className="ml-3 mt-4">

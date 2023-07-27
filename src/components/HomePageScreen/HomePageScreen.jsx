@@ -71,12 +71,16 @@ function HomePageScreen() {
     e.preventDefault();
     setPostBtn(true);
   };
+  const handleModalClose = () => {
+    setPostBtn(false);
+    get_post();
+  };
 
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      {postBtn && <CreatePostModal closeModal={setPostBtn} />}
+      {postBtn && <CreatePostModal closeModal={handleModalClose} />}
 
       <div className="bg-[#0F2A36]">
         <HomepageNavbar open={open} setOpen={setOpen} />
