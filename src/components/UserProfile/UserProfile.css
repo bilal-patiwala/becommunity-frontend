@@ -4,6 +4,10 @@
     width: 240px;
 }
 
+.profileBox {
+    min-height: 100vh;
+}
+
 .camera-img{
     background-color: #03C988;
     border-radius: 50%;
