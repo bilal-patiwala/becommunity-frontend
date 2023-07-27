@@ -2,9 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import "./CreatePost.css";
 import "./CreatePostModal.css";
+import Tooltip from "@mui/material/Tooltip";
 import AuthContext from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+
 function CreatePostModal({ closeModal }) {
+  const [file, setFile] = useState("");
+  const [fileBtn, setFileBtn] = useState(false);
   const [communities, setCommunities] = useState([]);
   const { authToken } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -63,6 +67,14 @@ function CreatePostModal({ closeModal }) {
     closeModal();
   };
 
+  const fileUpload = (e) => {
+    e.preventDefault();
+    console.log(e.target.files[0]);
+
+    setFile(e.target.files[0]);
+    setFileBtn(true);
+}
+
   return (
     <div className="Modal bg-gray-700 bg-opacity-60 backdrop-filter backdrop-blur-sm z-30 w-full py-5 fixed flex justify-center h-screen items-center">
       <div className="ModalContainer h-screen relative md:w-1/2 w-full md:mx-0 mx-5 rounded-lg flex flex-col">
@@ -77,7 +89,7 @@ function CreatePostModal({ closeModal }) {
             </button>
           </div>
 
-          <div className="bg-[#0F2A36] rounded-lg w-full model-main-container pb-3 px-2">
+          <div className="bg-[#0F2A36] rounded-lg w-full model-main-container pb-3 px-2 border-2 border-gray-800">
             <div className="font-Inter text-white">
               <div className="pl-[16px] pt-4 pb-2 text-2xl">
                 Create New Post
@@ -113,16 +125,19 @@ function CreatePostModal({ closeModal }) {
                     ))}
                   </select>
                 </div>
-                <div className="post-image">
-                  <input
-                    className="post-image-input ml-3 mt-2"
-                    type="file"
-                    {...register("post-image")}
-                  />
+                <div className="post-image ml-3 mt-3">
+                  <Tooltip className="transition delay-40 ease-in duration-400 bg-[#0B222C] text-gray-200" title="Attach file" arrow>
+                      <label htmlFor="file" className="cursor-pointer rounded-lg">
+                        <div className="flex pt-2 px-2">
+                          <i className="fa fa-link text-lg" /><p className="text-gray-200 text-md mx-2">Attach file</p>
+                        </div>
+                        <input className="post-image-input" type="file" onChange={fileUpload} {...register("post-image")} accept="image/*" hidden />
+                      </label>
+                  </Tooltip>
                 </div>
-                <div className="ml-3 mt-4">
+                <div className="ml-3 mt-4 text-center">
                   <button
-                    className="bg-[#fff] p-2 rounded-lg text-black hover:bg-green-500"
+                    className="bg-[#fff] p-2 px-4 rounded-lg text-black hover:bg-green-400"
                     type="submit"
                   >
                     Submit

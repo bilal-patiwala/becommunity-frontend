@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useParams } from "react-router-dom";
+import { PageLoader } from "../PageLoader/PageLoader";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import thumbsUp from "../../assets/thumbs-up.svg";
 import thumbsDown from "../../assets/thumbs-down.svg";

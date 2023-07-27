@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
+import { PageLoader } from "../PageLoader/PageLoader";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { useLocation,useParams } from "react-router-dom";
 function Posts() {
@@ -37,16 +38,19 @@ function Posts() {
     get_community_posts();
   }, [communityId]);
   return (
+    <>
+    {loading ? (
+      <>
+        {/* <LoadingSpinner height="60px" width="60px" /> */}
+        <PageLoader />
+        <PageLoader />
+        </>
+    ) : (
     <div className="text-white flex justify-center">
       <div
         className={`flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
       >
-        {loading ? (
-          <div className="flex justify-center items-center mt-8">
-            <LoadingSpinner height="60px" width="60px" />
-          </div>
-        ) : (
-          <div className="flex flex-col w-full justify-center items-center">
+       <div className="flex flex-col w-full justify-center items-center">
             {" "}
             {communityPosts.map((post) => (
               <div className="font-Inter w-2/3 rounded-lg bg-[#0B222C] py-3 mb-4 post-div">
@@ -67,9 +71,10 @@ function Posts() {
               </div>
             ))}
           </div>
-        )}
       </div>
     </div>
+    )}
+    </>
   );
 }
 

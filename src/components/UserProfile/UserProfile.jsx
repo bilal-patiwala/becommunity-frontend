@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./UserProfile.css";
 import AuthContext from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Tooltip from "@mui/material/Tooltip";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import cameraImg from "../../assets/camera.svg";
 function UserProfile() {
@@ -86,10 +87,15 @@ function UserProfile() {
   };
 
   return (
-    <div className="bg-[#0F2A36]">
+    <div className="profileBox bg-[#0F2A36]">
       {loading ? (
-        <div className="flex justify-center items-center pt-8">
-          <LoadingSpinner height="60px" width="60px" />
+        <div>
+          <div className="flex justify-center items-center pt-32">
+            <LoadingSpinner height="60px" width="60px" />
+          </div>
+          <div className="flex justify-center items-center">
+            <p className="text-white my-4 text-xl">Loading your profile...</p>
+          </div>
         </div>
       ) : (
         <>
@@ -98,34 +104,43 @@ function UserProfile() {
           </div>
           <div className="px-4">
             {updatedImg ? (
-              <div className="mb-2">
-                <img
-                  className="user-profile-img"
-                  height="400px"
-                  width="400px"
-                  src={updatedImg}
-                  alt=""
-                />
-                <input type="file" onChange={handleImageUpload} />
-                <div className="camera-img">
-                  <img src={cameraImg} alt="" />
-                </div>
+              <div className="mb-2 relative">
+              <img
+                className="relative user-profile-img border-2 border-black shadow-xl"
+                height="400px"
+                width="400px"
+                src={updatedImg}
+                alt=""
+              />
 
-                <br />
-              </div>
+              <Tooltip className="transition delay-40 ease-in duration-400 bg-[#0e394b] text-white" title="Choose image" arrow>
+                <div className="absolute left-44 bottom-5 camera-img">
+                  <label htmlFor="file" className="cursor-pointer">
+                    <img src={cameraImg} alt="" />
+                    <input type="file" id="file" name="image" onChange={handleImageUpload} accept="image/*" hidden />
+                  </label>
+                </div>
+              </Tooltip>
+              <br />
+            </div>
             ) : (
-              <div className="mb-2">
+              <div className="mb-2 relative">
                 <img
-                  className="user-profile-img"
+                  className="relative user-profile-img border-2 border-black shadow-xl"
                   height="400px"
                   width="400px"
                   src={`data:image/jpeg;base64,${userData.image}`}
                   alt=""
                 />
-                <input type="file" onChange={handleImageUpload} />
-                <div className="camera-img">
-                  <img src={cameraImg} alt="" />
-                </div>
+
+                <Tooltip className="transition delay-40 ease-in duration-400 bg-[#0e394b] text-white" title="Choose image" arrow>
+                  <div className="absolute left-44 bottom-5 camera-img">
+                    <label htmlFor="file" className="cursor-pointer">
+                      <img src={cameraImg} alt="" />
+                      <input type="file" id="file" name="image" onChange={handleImageUpload} accept="image/*" hidden />
+                    </label>
+                  </div>
+                </Tooltip>
                 <br />
               </div>
             )}
