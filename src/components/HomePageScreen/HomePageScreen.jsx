@@ -72,7 +72,7 @@ function HomePageScreen() {
     setPostBtn(true);
   };
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <>
@@ -90,9 +90,8 @@ function HomePageScreen() {
           </div>
 
           <div
-            className={`${
-              open ? "w-3/5" : "w-4/5"
-            } flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
+            className={`${open ? "w-3/5" : "w-4/5"
+              } flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
           >
             <Tooltip
               className="transition delay-40 ease-in duration-400 text-black"
@@ -113,9 +112,55 @@ function HomePageScreen() {
               </div>
             </Tooltip>
             {postLoading ? (
-              <div className="flex justify-center items-center mt-8">
-                <LoadingSpinner height="60px" width="60px" />
-              </div>
+              <>
+                {/* <LoadingSpinner height="60px" width="60px" /> */}
+                <div class="shadow rounded-md p-4 w-2/3 mx-auto mb-20">
+                  <div class="animate-pulse flex space-x-4">
+                    <div class="rounded-full bg-slate-200 h-16 w-16"></div>
+                    <div class="flex-1 space-y-6 py-1">
+                      <div class="h-4 bg-slate-200 rounded"></div>
+                      <div class="space-y-3">
+                        <div class="grid grid-cols-3 gap-4">
+                          <div class="h-4 bg-slate-200 rounded col-span-2"></div>
+                          <div class="h-4 bg-slate-200 rounded col-span-1"></div>
+                        </div>
+                        <div class="h-4 bg-slate-200 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="shadow rounded-md p-4 w-2/3 mx-auto mb-20">
+                  <div class="animate-pulse flex space-x-4">
+                    <div class="rounded-full bg-slate-200 h-16 w-16"></div>
+                    <div class="flex-1 space-y-6 py-1">
+                      <div class="h-4 bg-slate-200 rounded"></div>
+                      <div class="space-y-3">
+                        <div class="grid grid-cols-3 gap-4">
+                          <div class="h-4 bg-slate-200 rounded col-span-2"></div>
+                          <div class="h-4 bg-slate-200 rounded col-span-1"></div>
+                        </div>
+                        <div class="h-4 bg-slate-200 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="shadow rounded-md p-4 w-2/3 mx-auto">
+                  <div class="animate-pulse flex space-x-4">
+                    <div class="rounded-full bg-slate-200 h-16 w-16"></div>
+                    <div class="flex-1 space-y-6 py-1">
+                      <div class="h-4 bg-slate-200 rounded"></div>
+                      <div class="space-y-3">
+                        <div class="grid grid-cols-3 gap-4">
+                          <div class="h-4 bg-slate-200 rounded col-span-2"></div>
+                          <div class="h-4 bg-slate-200 rounded col-span-1"></div>
+                        </div>
+                        <div class="h-4 bg-slate-200 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                </>
             ) : (
               <div className="flex flex-col w-full justify-center items-center">
                 {" "}

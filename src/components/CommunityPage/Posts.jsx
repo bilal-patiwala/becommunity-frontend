@@ -15,7 +15,7 @@ function Posts() {
     if (storedId) {
       setCommunityId(storedId);
     }
-  }, []);
+  });
   const get_community_posts = async () => {
     setLoading(true);
     let response = await fetch(
