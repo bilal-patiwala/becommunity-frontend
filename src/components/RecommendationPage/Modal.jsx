@@ -159,7 +159,7 @@ function Modal({ closeModal, interestvalues }) {
                             {community.image ? (
                                 <img
                                   className="h-[40px] w-[40px] rounded-full"
-                                  src={`http://127.0.0.1:8000${community.image}`}
+                                  src={`data:image/jpeg;base64,${community.image}`}
                                   alt=""
                                 />
                               ) : (
