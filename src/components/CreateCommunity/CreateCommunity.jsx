@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import "./CreateCommunity.css";
+import { useNavigate } from "react-router-dom";
 import CreatableSelect from 'react-select/creatable';
 function CreateCommunity() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [categories, setCategories] = useState([]);
-
+  const navigate = useNavigate();
   const { authToken } = useContext(AuthContext);
 
   const get_categories = async () => {
@@ -49,6 +50,7 @@ function CreateCommunity() {
     });
     let responseData = await response.json();
     console.log(responseData);
+    navigate("/");
   };
 
   return (

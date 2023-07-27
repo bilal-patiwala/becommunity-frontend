@@ -1,23 +1,30 @@
 .ModalContainer {
-    height: 70vh;
-    overflow-y: auto;
+  height: 70vh;
+  overflow-y: auto;
 }
-.model-main-container{
-    height: 100%;
+.model-main-container {
+  height: 100%;
 }
-.Modal{
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-
-}
-::-webkit-scrollbar{
-    width: 5px;
+.Modal {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-::-webkit-scrollbar-track{
-    background: white;
+input[type="checkbox"]{
+    /* background-color: #a77e2d !important;
+    color: #ffffff !important; */
+    accent-color: #03C988;
+}
+::-webkit-scrollbar {
+  width: 5px;
 }
 
-::-webkit-scrollbar-thumb{
-    background: linear-gradient(rgb(60, 238, 137), rgb(3, 132, 84));
-    border-radius: 44px; 
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(rgb(60, 238, 137), rgb(3, 132, 84));
+  border-radius: 44px;
 }
