@@ -14,6 +14,25 @@ function Modal({ closeModal, interestvalues }) {
     closeModal(false);
   };
 
+  // Function to handle checkbox changes
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    if (checked) {
+      setCommunities((prevCommunities) => [...prevCommunities, name]);
+    } else {
+      setCommunities((prevCommunities) =>
+        prevCommunities.filter((community) => community !== name)
+      );
+    }
+  };
+
+  // Function to handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // You can handle the selected communities here (e.g., send them to the server)
+    console.log('Selected communities:', communities);
+  };
+
   const navigate = useNavigate();
   const [interestdata, setInterestData] = useState([]);
   const [communities, setCommunities] = useState({});
@@ -132,10 +151,43 @@ function Modal({ closeModal, interestvalues }) {
                       <div className="flex flex-wrap flex-row mx-4">
                         {communityList.map((community) => (
                           <div
-                            className="flex flex-col justify-center mb-4 w-[160px] bg-[#0A1C24] mr-4 pt-4 pb-2 rounded-[12px]"
+                            className="flex flex-col justify-center mb-4 mx-2 w-fit bg-[#0A1C24] pt-2 px-4 rounded-[12px]"
                             key={community.id}
                           >
-                            <div className="flex justify-center">
+                          <div className="flex">
+                            <div className="flex justify-center items-center mr-5">
+                            {community.image ? (
+                                <img
+                                  className="h-[40px] w-[40px] rounded-full"
+                                  src={`http://127.0.0.1:8000${community.image}`}
+                                  alt=""
+                                />
+                              ) : (
+                                <img
+                                  className="h-[40px] w-[40px] rounded-full"
+                                  src={testImg}
+                                  alt=""
+                                />
+                              )}
+                              </div>
+                              <div className="flex justify-center items-center py-2">
+                              <form className="flex items-center" onSubmit={handleSubmit}>
+                                <div>
+                                <p className="font-Inter text-white text-center font-medium">{community.name}</p>
+                                </div>
+                                <div>
+                                  <input
+                                    type="checkbox"
+                                    name="Community 1"
+                                    className="mx-3 w-5 h-5 mb-3"
+                                    // checked={communities.includes('Community 1')}
+                                    onChange={handleCheckboxChange}
+                                  />
+                                  </div>
+                              </form>
+                              </div>
+                            
+                            {/* <div className="flex justify-center">
                               {community.image ? (
                                 <img
                                   className="h-[74px] w-[74px] rounded-full"
@@ -185,7 +237,8 @@ function Modal({ closeModal, interestvalues }) {
                                   </div>
                                 )}
                               </button>
-                            </div>
+                            </div> */}
+                          </div>
                           </div>
                         ))}
                       </div>
@@ -194,15 +247,15 @@ function Modal({ closeModal, interestvalues }) {
                 )}{" "}
                 <Link to="/">
                   <div className="w-full bg-[#0F2A36] text-center sticky bottom-0">
-                  <button
-                    id="goto-homepage-btn"
-                    className="m-2 rounded-[12px] bg-[#03C988] hover:bg-[#08a36f]"
-                    type="submit"
-                  >
-                    <div className="px-5 py-2 text-md text-black font-Inter font-semibold">
-                      Next <i className="fa fa-arrow-right ml-1"></i>
-                    </div>
-                  </button>
+                    <button
+                      id="goto-homepage-btn"
+                      className="m-2 rounded-[12px] bg-[#03C988] hover:bg-[#08a36f]"
+                      type="submit"
+                    >
+                      <div className="px-5 py-2 text-md text-black font-Inter font-semibold">
+                        Next <i className="fa fa-arrow-right ml-1"></i>
+                      </div>
+                    </button>
                   </div>
                 </Link>
               </div>
