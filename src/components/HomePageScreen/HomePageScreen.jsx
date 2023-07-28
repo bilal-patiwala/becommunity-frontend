@@ -93,7 +93,7 @@ function HomePageScreen() {
           <div>
             <HomepageSidebar open={open} />
           </div>
-
+        
           <div
             className={`${open ? "w-3/5" : "w-4/5"
               } flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
@@ -111,11 +111,12 @@ function HomePageScreen() {
                   onClick={post}
                   className="flex flex-row items-center text-xl font-black text-white font-bold text-center"
                 >
-                  <i className="fa fa-plus mr-2"></i>
+                  <i className="fa fa-plus mr-1"></i>
                   <div>Post</div>
                 </button>
               </div>
             </Tooltip>
+
             {postLoading ? (
               <>
                 {/* <LoadingSpinner height="60px" width="60px" /> */}
@@ -146,8 +147,9 @@ function HomePageScreen() {
                         {post.description}
                       </div>
                       {post.image && (
-                        <div>
+                        <div className="object-cover">
                           <img
+                          className="w-full"
                             src={`data:image/jpeg;base64,${post.image}`}
                             alt=""
                           />

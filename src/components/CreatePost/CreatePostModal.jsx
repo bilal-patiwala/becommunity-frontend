@@ -69,6 +69,7 @@ function CreatePostModal({ closeModal }) {
 
   const fileUpload = (e) => {
     e.preventDefault();
+    
     console.log(e.target.files[0]);
 
     setFile(e.target.files[0]);
@@ -83,7 +84,7 @@ function CreatePostModal({ closeModal }) {
             <button
               id="close"
               onClick={close}
-              className="px-3 pb-2 absolute rounded-lg right-2 top-1 hover:bg-[#1e414f]"
+              className="px-3 pb-2 absolute rounded-lg right-3 top-2 hover:bg-[#1e414f]"
             >
               x
             </button>
@@ -91,7 +92,7 @@ function CreatePostModal({ closeModal }) {
 
           <div className="bg-[#0F2A36] rounded-lg w-full model-main-container pb-3 px-2 border-2 border-gray-800">
             <div className="font-Inter text-white">
-              <div className="pl-[16px] pt-4 pb-2 text-2xl">
+              <div className="pl-[16px] pt-4 pb-2 text-2xl border-b-2 border-white w-fit px-10 rounded-md mb-3">
                 Create New Post
               </div>
               <form onSubmit={handleSubmit(handleCreatePost)}>
@@ -129,9 +130,9 @@ function CreatePostModal({ closeModal }) {
                   <Tooltip className="transition delay-40 ease-in duration-400 bg-[#0B222C] text-gray-200" title="Attach file" arrow>
                       <label htmlFor="file" className="cursor-pointer rounded-lg">
                         <div className="flex pt-2 px-2">
-                          <i className="fa fa-link text-lg" /><p className="text-gray-200 text-md mx-2">Attach file</p>
+                          <i className="fa fa-link text-lg" /><p className="text-gray-200 text-md mx-2">{fileBtn == true ? file.name : "Attach file"}</p>
                         </div>
-                        <input className="post-image-input" type="file" onChange={fileUpload} {...register("post-image")} accept="image/*" hidden />
+                        <input className="post-image-input" type="file" id="file" name="file" onChangeCapture={fileUpload} {...register("post-image")} accept="image/*" hidden />
                       </label>
                   </Tooltip>
                 </div>
