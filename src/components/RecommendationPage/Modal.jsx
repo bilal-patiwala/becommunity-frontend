@@ -4,7 +4,6 @@ import AuthContext from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import "./Modal.css";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-
 import testImg from "../../assets/maksim-istomin-BSx5n20J-qg-unsplash.jpg";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
@@ -27,7 +26,7 @@ function Modal({ closeModal, interestvalues }) {
   // Function to handle checkbox changes
   const [communities, setCommunities] = useState([]);
   const [recentlyJoinedCommunities, setJoinedCommunities] = useState([]);
-  const [checkStates,setCheckBoxState] = useState([]);
+  const [checkStates, setCheckBoxState] = useState([]);
   // Separate function to handle checkbox change
   const handleCheckboxChange = (id) => (event) => {
     event.preventDefault();
@@ -42,26 +41,19 @@ function Modal({ closeModal, interestvalues }) {
     console.log(id);
   };
 
-  // Function to handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // You can handle the selected communities here (e.g., send them to the server)
-    console.log("Selected communities:", communities);
-  };
-
   useEffect(() => {
     get_communities();
   }, [interestvalues]);
 
   const handleCheckBoxes = () => {
     const checkboxStates = Object.values(communities).flatMap((array) =>
-    array.map((community) => ({
-      id: community.id,
-      isChecked: recentlyJoinedCommunities.includes(community.id),
-    }))
-  );
-  console.log(checkboxStates);
-  setCheckBoxState(checkboxStates);
+      array.map((community) => ({
+        id: community.id,
+        isChecked: recentlyJoinedCommunities.includes(community.id),
+      }))
+    );
+    console.log(checkboxStates);
+    setCheckBoxState(checkboxStates);
   };
 
   useEffect(() => {
@@ -86,35 +78,31 @@ function Modal({ closeModal, interestvalues }) {
     console.log(communities);
   };
 
-  // const communities = {
-  //   Technology: [
-  //     {
-  //       id: 1,
-  //       name: "TechTalk",
-  //       description: "A place for tech enthusiasts to discuss",
-  //       creator: "ameliah",
-  //       image: null,
+  // const join = async (id) => {
+  //   setJoinLoading(true);
+  //   setDId([...d_id, id]);
+  //   let response = await fetch("http://127.0.0.1:8000/join/", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${authToken.refresh}`,
+  //       "X-CSRFToken": csrftoken,
   //     },
-  //     {
-  //       id: 2,
-  //       name: "CodeCrafters",
-  //       description: "Join fellow programmers",
-  //       creator: "avat",
-  //       image: null,
-  //     },
-  //     {
-  //       id: 4,
-  //       name: "eSportsElite",
-  //       description: "eSportsElite is the ultimate destination",
-  //       creator: "avat",
-  //       image: "/media/community/60561.jpg",
-  //     },
-  //   ],
+  //     body: JSON.stringify({
+  //       id: id,
+  //     }),
+  //   });
+  //   let data = await response.json();
+  //   setJoinLoading(false);
+  //   console.log(data);
+  //   if (data.status === 201) {
+  //     setCId([...c_id, id]);
+  //   } else if (data.status === 403) {
+  //     setCId([...c_id, id]);
+  //   }
   // };
 
-  const join = async (id) => {
-    setJoinLoading(true);
-    setDId([...d_id, id]);
+  const handleCommunityJoin = async () => {
     let response = await fetch("http://127.0.0.1:8000/join/", {
       method: "POST",
       headers: {
@@ -122,18 +110,12 @@ function Modal({ closeModal, interestvalues }) {
         Authorization: `Bearer ${authToken.refresh}`,
         "X-CSRFToken": csrftoken,
       },
-      body: JSON.stringify({
-        id: id,
-      }),
+      body: JSON.stringify({ data: recentlyJoinedCommunities }),
     });
+
     let data = await response.json();
-    setJoinLoading(false);
     console.log(data);
-    if (data.status === 201) {
-      setCId([...c_id, id]);
-    } else if (data.status === 403) {
-      setCId([...c_id, id]);
-    }
+    navigate("/");
   };
 
   return (
@@ -169,7 +151,7 @@ function Modal({ closeModal, interestvalues }) {
                         {category}
                       </div>
                       <div className="flex flex-wrap flex-row mx-4">
-                        {communityList.map((community,index) => (
+                        {communityList.map((community, index) => (
                           <div
                             className="flex flex-col justify-center mb-4 mx-2 w-[134px] bg-[#0A1C24] p-2 rounded-[12px]"
                             key={community.id}
@@ -182,7 +164,11 @@ function Modal({ closeModal, interestvalues }) {
                                     name="Community-1"
                                     className="h-5 w-5 cursor-pointer bg-[#0F2A36]"
                                     // checked={recentlyJoinedCommunities.includes(community.id)}
-                                    checked={checkStates.find((item) => item.id === community.id)?.isChecked}
+                                    checked={
+                                      checkStates.find(
+                                        (item) => item.id === community.id
+                                      )?.isChecked
+                                    }
                                     onChange={handleCheckboxChange(
                                       community.id
                                     )}
@@ -270,19 +256,18 @@ function Modal({ closeModal, interestvalues }) {
                     </div>
                   )
                 )}{" "}
-                <Link to="/">
-                  <div className="w-full bg-[#0F2A36] text-center sticky bottom-0">
-                    <button
-                      id="goto-homepage-btn"
-                      className="m-2 rounded-[12px] bg-[#03C988] hover:bg-[#08a36f]"
-                      type="submit"
-                    >
-                      <div className="px-5 py-2 text-md text-black font-Inter font-semibold">
-                        Next <i className="fa fa-arrow-right ml-1"></i>
-                      </div>
-                    </button>
-                  </div>
-                </Link>
+                <div className="w-full bg-[#0F2A36] text-center sticky bottom-0">
+                  <button
+                    onClick={handleCommunityJoin}
+                    id="goto-homepage-btn"
+                    className="m-2 rounded-[12px] bg-[#03C988] hover:bg-[#08a36f]"
+                    type="submit"
+                  >
+                    <div className="px-5 py-2 text-md text-black font-Inter font-semibold">
+                      Next <i className="fa fa-arrow-right ml-1"></i>
+                    </div>
+                  </button>
+                </div>
               </div>
             )}
           </div>
