@@ -64,8 +64,8 @@ function Posts() {
                   {post.description}
                 </div>
                 {post.image && (
-                  <div>
-                    <img src={`data:image/jpeg;base64,${post.image}`} alt="" />
+                  <div className="object-cover">
+                    <img className="w-full" src={`data:image/jpeg;base64,${post.image}`} alt="" />
                   </div>
                 )}
               </div>

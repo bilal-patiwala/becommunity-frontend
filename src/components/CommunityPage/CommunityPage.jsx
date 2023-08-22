@@ -81,14 +81,14 @@ function CommunityPage() {
         </div>
         ) : (
             <div className="border-[#304953] border-b-2 font-Inter text-white flex flex-row">
-              <div className="mt-3 mb-3 mx-3">
+              <div className="mt-2 mb-2 mx-3">
                 <img
                   src={`data:image/jpeg;base64,${communityInfo.image}`}
                   className="community-header-image"
                   alt=""
                 />
               </div>
-              <div className="my-[24px] mb-3 text-lg font-semibold">
+              <div className="my-[15px] text-lg font-semibold">
                 {communityInfo.name}
               </div>
             </div>
