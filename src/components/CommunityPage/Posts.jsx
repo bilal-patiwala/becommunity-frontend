@@ -48,12 +48,12 @@ function Posts() {
     ) : (
     <div className="text-white flex justify-center">
       <div
-        className={`flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
+        className={`flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-2`}
       >
        <div className="flex flex-col w-full justify-center items-center">
             {" "}
             {communityPosts.map((post) => (
-              <div className="font-Inter w-2/3 rounded-lg bg-[#0B222C] py-3 mb-4 post-div">
+              <div className="font-Inter w-7/12 rounded-lg bg-[#0B222C] py-3 mb-4 post-div">
                 <div className="title text-[#ACACAC] py-2 px-4">
                   {post.post_creator} | {post.community}
                 </div>
@@ -64,8 +64,8 @@ function Posts() {
                   {post.description}
                 </div>
                 {post.image && (
-                  <div>
-                    <img src={`data:image/jpeg;base64,${post.image}`} alt="" />
+                  <div className="object-contain px-2">
+                    <img className="w-full rounded-lg max-h-96" src={`data:image/jpeg;base64,${post.image}`} alt="" />
                   </div>
                 )}
               </div>

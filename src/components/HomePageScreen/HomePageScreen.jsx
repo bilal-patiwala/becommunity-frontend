@@ -74,7 +74,7 @@ function HomePageScreen() {
   };
   const handleModalClose = () => {
     setPostBtn(false);
-    get_post();
+    // get_post();
   };
 
   const [open, setOpen] = useState(true);
@@ -98,6 +98,7 @@ function HomePageScreen() {
             className={`${open ? "w-3/5" : "w-4/5"
               } flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
           >
+          <div className="w-full flex justify-end items-center">
             <Tooltip
               className="transition delay-40 ease-in duration-400 text-black"
               title="Create Post"
@@ -105,7 +106,7 @@ function HomePageScreen() {
             >
               <div
                 id="post"
-                className="font-Inter z-20 fixed bottom-7 right-80 rounded-full shadow-xl bg-green-600 pr-4 pl-3 py-2"
+                className="font-Inter z-20 fixed bottom-7 rounded-full shadow-xl bg-green-600 pr-4 pl-3 py-2"
               >
                 <button
                   onClick={post}
@@ -116,6 +117,7 @@ function HomePageScreen() {
                 </button>
               </div>
             </Tooltip>
+            </div>
 
             {postLoading ? (
               <>
