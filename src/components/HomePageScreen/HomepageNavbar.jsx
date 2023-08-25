@@ -81,7 +81,17 @@ function HomepageNavbar({ open, setOpen }) {
     if (communitySearch !== "") {
       handleCommunitySearch(communitySearch);
     }
+    else if (communitySearch === "") {
+      setMatchingCommunities([]);
+    }
   }, [communitySearch]);
+  
+  const handleClick = (id) => {
+    localStorage.setItem('communityId', id);
+    Navigate(`/community/${id}`);
+    setMatchingCommunities([]);
+    setCommunitySearch("");
+  }
 
   return (
     <>
@@ -118,6 +128,22 @@ function HomepageNavbar({ open, setOpen }) {
                   }}
                   value={communitySearch}
                 />
+                <div className="absolute top-10 left-20 w-[100%] text-white flex justify-center">
+                  {matchingCommunities.length > 0 ? (
+                    <div className="bg-[#0B222C] w-[100%] searchQuery">
+                      {matchingCommunities.map((community) => (
+                          <div
+                            onClick={()=>handleClick(community.id)}
+                            key={community.id}
+                            className="flex h-full px-2 py-3 m-2 text-sm rounded-[12px] justify-between hover:bg-[#0F2A36] text-white font-Inter"
+                          >
+                            <div className="font-semibold px-2">{community.name}</div>
+                            <div className="px-2">{community.members} members</div>
+                          </div>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
 
@@ -192,23 +218,6 @@ function HomepageNavbar({ open, setOpen }) {
             </div>
           </nav>
         </header>
-        <div className="text-white flex justify-center">
-          {matchingCommunities.length > 0 ? (
-            <div className="bg-[#0B222C] w-[39%] searchQuery">
-              {matchingCommunities.map((community) => (
-                <Link style={{textDecoration:"none"}} to={`/community/${community.id}`}>
-                  <div
-                    key={community.id}
-                    className="flex h-full px-2 py-3 m-2 rounded-[12px] justify-between hover:bg-[#0F2A36] text-white font-Inter"
-                  >
-                    <div className="font-semibold px-2">{community.name}</div>
-                    <div className="px-2">{community.members} members</div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          ) : null}
-        </div>
       </div>
     </>
   );
