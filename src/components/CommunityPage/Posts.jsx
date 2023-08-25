@@ -48,7 +48,7 @@ function Posts() {
     ) : (
     <div className="text-white flex justify-center">
       <div
-        className={`flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-2`}
+        className={`flex flex-col items-center z-10 p-2 bg-[#0F2A36] rounded-lg pt-2`}
       >
        <div className="flex flex-col w-full justify-center items-center">
             {" "}
