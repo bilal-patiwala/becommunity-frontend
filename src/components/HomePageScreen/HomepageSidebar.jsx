@@ -54,7 +54,7 @@ function HomepageSidebar({ open,activeTab,setActiveTab }) {
         className="w-1/5 font-Inter h-screen flex flex-col items-center shadow-xl z-10 p-2 bg-[#0B222C] left-0 top-10 sticky overflow-y-auto"
       >
         <div
-          onClick={()=>{setActiveTab("")}}
+          onClick={navigateHome}
           style={{ justifyContent: open ? "flex-start" : "center" }}
           className="w-2/3 flex items-center bg-[#0B222C] hover:bg-[#0F2A36] text-white py-2 text-center text-md rounded-lg w-full my-3 cursor-pointer"
         >
