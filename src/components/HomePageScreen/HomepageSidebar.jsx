@@ -91,6 +91,7 @@ function HomepageSidebar({ open }) {
           Joined
         </div>
         {communityLoading ? (
+          open ? (
           <>
           <div class="shadow rounded-md p-4 w-full mx-auto mb-7">
           <div class="animate-pulse flex space-x-4">
@@ -119,8 +120,9 @@ function HomepageSidebar({ open }) {
           </div>
         </div>
       </>
-            // {/* <LoadingSpinner height="30px" width="30px" /> */}
-
+          ) : (
+            <LoadingSpinner height="30px" width="30px" />
+          )
 
         ) : (
           <>

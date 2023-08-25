@@ -93,30 +93,30 @@ function HomePageScreen() {
           <div>
             <HomepageSidebar open={open} />
           </div>
-        
+
           <div
             className={`${open ? "w-3/5" : "w-4/5"
               } flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
           >
-          <div className="w-full flex justify-end items-center">
-            <Tooltip
-              className="transition delay-40 ease-in duration-400 text-black"
-              title="Create Post"
-              arrow
-            >
-              <div
-                id="post"
-                className="font-Inter z-20 fixed bottom-7 rounded-full shadow-xl bg-green-600 pr-4 pl-3 py-2"
+            <div className="w-full flex justify-end items-center">
+              <Tooltip
+                className="transition delay-40 ease-in duration-400 text-black"
+                title="Create Post"
+                arrow
               >
-                <button
-                  onClick={post}
-                  className="flex flex-row items-center text-xl font-black text-white font-bold text-center"
+                <div
+                  id="post"
+                  className="font-Inter z-20 fixed bottom-7 rounded-full shadow-xl bg-green-600 pr-4 pl-3 py-2"
                 >
-                  <i className="fa fa-plus mr-1"></i>
-                  <div>Post</div>
-                </button>
-              </div>
-            </Tooltip>
+                  <button
+                    onClick={post}
+                    className="flex flex-row items-center text-xl font-black text-white font-bold text-center"
+                  >
+                    <i className="fa fa-plus mr-1"></i>
+                    <div>Post</div>
+                  </button>
+                </div>
+              </Tooltip>
             </div>
 
             {postLoading ? (
@@ -125,8 +125,8 @@ function HomePageScreen() {
                 <PageLoader />
                 <PageLoader />
                 <PageLoader />
-                
-                </>
+
+              </>
             ) : (
               <div className="flex flex-col w-full justify-center items-center">
                 {" "}
@@ -135,79 +135,94 @@ function HomePageScreen() {
                     key={post.id}
                     className="font-Inter w-2/3 rounded-lg bg-[#0B222C] py-3 mb-4 post-div"
                   >
-                    <Link
-                      style={{ textDecoration: "none" }}
-                      to={`/post/${post.id}`}
-                    >
-                      <div className="title text-[#ACACAC] py-2 px-4">
-                        {post.post_creator} | {post.community}
-                      </div>
-                      <div className="content font-semibold text-lg text-white px-4 pb-2">
-                        {post.title}
-                      </div>
-                      <div className="content text-[#c2c2c2] px-4 pb-4">
-                        {post.description}
-                      </div>
-                      {post.image && (
-                        <div className="object-cover">
-                          <img
+                    <div className="title text-[#ACACAC] py-2 px-4">
+                      {post.post_creator} | {post.community}
+                    </div>
+                    <div className="content font-semibold text-lg text-white px-4 pb-2">
+                      {post.title}
+                    </div>
+                    <div className="content text-[#c2c2c2] px-4 pb-4">
+                      {post.description}
+                    </div>
+                    {post.image && (
+                      <div className="object-cover">
+                        <img
                           className="w-full"
-                            src={`data:image/jpeg;base64,${post.image}`}
-                            alt=""
-                          />
-                        </div>
-                      )}
-                      <div className="text-white font-Inter flex items-center flex-row mt-3">
-                        <div className="px-4 flex flex-start">
-                          {post.has_liked ||
+                          src={`data:image/jpeg;base64,${post.image}`}
+                          alt=""
+                        />
+                      </div>
+                    )}
+                    <div className="text-white font-Inter flex items-center flex-row mt-3">
+                      <div className="px-4 flex flex-start">
+                        {post.has_liked ||
                           recentlyLikedPosts.includes(post.id) ? (
-                            <button onClick={() => handleLike(post.id, index)}>
-                              <img
-                                src={thumbsUpFilled}
-                                style={{ fill: "#fff" }}
-                                alt=""
-                              />
-                            </button>
-                          ) : (
-                            <button onClick={() => handleLike(post.id, index)}>
-                              <img src={thumbsUp} alt="" />
-                            </button>
-                          )}
-                          <div className="pt-[4px]">
-                            <span className="px-2 pt-0 mt-0 font-medium">
-                              {post.likes_count}
-                            </span>
-                          </div>
+                          <button onClick={() => handleLike(post.id, index)}>
+                            <img
+                              src={thumbsUpFilled}
+                              style={{ fill: "#fff" }}
+                              alt=""
+                            />
+                          </button>
+                        ) : (
+                          <Tooltip
+                          className="transition delay-40 ease-in duration-400 text-black"
+                          title="Like"
+                          arrow
+                        >
+                          <button onClick={() => handleLike(post.id, index)}>
+                            <img src={thumbsUp} alt="" />
+                          </button>
+                          </Tooltip>
+                        )}
+                        <div className="pt-[4px]">
+                          <span className="px-2 pt-0 mt-0 font-medium">
+                            {post.likes_count}
+                          </span>
                         </div>
-                        <div className="px-2 flex flex-start">
-                          {post.has_disliked ? (
-                            <button onClick={handleDislike}>
-                              <img
-                                src={thumbsDownFilled}
-                                style={{ color: "#fff" }}
-                                alt=""
-                              />
-                            </button>
-                          ) : (
-                            <button onClick={handleDislike}>
-                              <img
-                                src={thumbsDown}
-                                style={{ color: "#fff" }}
-                                alt=""
-                              />
-                            </button>
-                          )}
-                          <div className="pt-[4px]">
-                            <span className="px-2 pt-0 mt-0 font-medium">
-                              {post.dislikes_count}
-                            </span>
-                          </div>
+                      </div>
+                      <div className="px-2 flex flex-start">
+                        {post.has_disliked ? (
+                          <button onClick={handleDislike}>
+                            <img
+                              src={thumbsDownFilled}
+                              style={{ color: "#fff" }}
+                              alt=""
+                            />
+                          </button>
+                        ) : (
+                          <Tooltip
+                          className="transition delay-40 ease-in duration-400 text-black"
+                          title="Dislike"
+                          arrow
+                        >
+                          <button onClick={handleDislike}>
+                            <img
+                              src={thumbsDown}
+                              style={{ color: "#fff" }}
+                              alt=""
+                            />
+                          </button>
+                          </Tooltip>
+                        )}
+                        <div className="pt-[4px]">
+                          <span className="px-2 pt-0 mt-0 font-medium">
+                            {post.dislikes_count}
+                          </span>
                         </div>
+                      </div>
+                      <Tooltip
+                          className="transition delay-40 ease-in duration-400 text-black"
+                          title="Comment"
+                          arrow
+                        >
+                      <Link style={{ textDecoration: "none" }} to={`/post/${post.id}`}>
                         <div className="px-6">
                           <FaRegComments size={26} style={{ fill: "white" }} />
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
+                      </Tooltip>
+                    </div>
                   </div>
                 ))}
               </div>
