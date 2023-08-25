@@ -28,6 +28,7 @@ function HomePageScreen() {
   const [isLiked, setIsLiked] = useState(false);
   const [isDisLiked, setIsDisLiked] = useState(false);
   let [recentlyLikedPosts, setRecentlyLikedPosts] = useState([]);
+  const [activeTab, setActiveTab] = useState("");
 
   const handleLike = async (post_id, index) => {
     // e.preventDefault();
@@ -68,6 +69,34 @@ function HomePageScreen() {
     setPostLoading(false);
   };
 
+
+  const sortByDate = (a, b) => new Date(b.date) - new Date(a.date);
+  const sortByLikes = (a, b) => b.likes_count - a.likes_count;
+
+
+  const handleSortByDate = () => {
+    const sortedPosts = [...postsData].sort(sortByDate);
+    setPostsData(sortedPosts);
+  };
+
+  const handleSortByLikes = () => {
+    const sortedPosts = [...postsData].sort(sortByLikes);
+    setPostsData(sortedPosts);
+  };
+
+  useEffect(()=>{
+    if(activeTab=="top"){
+      handleSortByLikes();
+    }
+    else if(activeTab=="new"){
+      handleSortByDate();
+    }
+    else{
+      get_post();
+    }
+  },[activeTab])
+
+
   const post = (e) => {
     e.preventDefault();
     setPostBtn(true);
@@ -91,12 +120,12 @@ function HomePageScreen() {
           className="w-full flex bg-[#0F2A36]"
         >
           <div>
-            <HomepageSidebar open={open} />
+            <HomepageSidebar activeTab={activeTab} setActiveTab={setActiveTab}  open={open} />
           </div>
 
           <div
             className={`${open ? "w-3/5" : "w-4/5"
-              } flex flex-col items-center shadow-xl z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
+              } flex flex-col items-center z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
           >
             <div className="w-full flex justify-end items-center">
               <Tooltip
@@ -153,9 +182,9 @@ function HomePageScreen() {
                         />
                       </div>
                     )}
-                    <div className="text-white font-Inter flex items-center flex-row mt-3">
-                      <div className="px-4 flex flex-start">
-                        {post.has_liked ||
+                      <div className="text-white font-Inter flex items-center flex-row mt-3">
+                        <div className="px-4 flex flex-start">
+                          {post.has_liked ||
                           recentlyLikedPosts.includes(post.id) ? (
                           <button onClick={() => handleLike(post.id, index)}>
                             <img

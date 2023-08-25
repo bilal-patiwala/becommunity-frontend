@@ -92,7 +92,7 @@ function CreatePostModal({ closeModal }) {
 
           <div className="bg-[#0F2A36] rounded-lg w-full model-main-container pb-3 px-2 border-2 border-gray-800">
             <div className="font-Inter text-white">
-              <div className="pl-[16px] pt-4 pb-2 text-2xl border-b-2 border-white w-fit px-10 rounded-md mb-3">
+              <div className="pl-[16px] pt-4 pb-2 text-2xl border-b-2 border-white w-fit px-10 mb-3">
                 Create New Post
               </div>
               <form onSubmit={handleSubmit(handleCreatePost)}>

@@ -7,9 +7,10 @@ import AuthContext from "../../context/AuthContext";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
 
-function HomepageSidebar({ open }) {
+function HomepageSidebar({ open,activeTab,setActiveTab }) {
   const [joinedCommunities, setJoinedCommunities] = useState([]);
   const [communityLoading, setCommunityLoading] = useState(false);
+
   const { authToken } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
@@ -53,7 +54,7 @@ function HomepageSidebar({ open }) {
         className="w-1/5 font-Inter h-screen flex flex-col items-center shadow-xl z-10 p-2 bg-[#0B222C] left-0 top-10 sticky overflow-y-auto"
       >
         <div
-          onClick={()=>navigateHome()}
+          onClick={()=>{setActiveTab("")}}
           style={{ justifyContent: open ? "flex-start" : "center" }}
           className="w-2/3 flex items-center bg-[#0B222C] hover:bg-[#0F2A36] text-white py-2 text-center text-md rounded-lg w-full my-3 cursor-pointer"
         >
@@ -62,7 +63,7 @@ function HomepageSidebar({ open }) {
           </div>
           <div style={{ display: open ? "block" : "none" }}>Home</div>
         </div>
-        <div
+        <div onClick={()=>{setActiveTab("top")}}
           style={{ justifyContent: open ? "flex-start" : "center" }}
           className="w-2/3 flex items-center bg-[#0B222C] hover:bg-[#0F2A36] text-white py-2 text-center text-md rounded-lg w-full mb-3 cursor-pointer"
         >
@@ -71,7 +72,7 @@ function HomepageSidebar({ open }) {
           </div>
           <div style={{ display: open ? "block" : "none" }}>Top</div>
         </div>
-        <div
+        <div onClick={()=>{setActiveTab("new")}}
           style={{ justifyContent: open ? "flex-start" : "center" }}
           className="w-2/3 flex items-center bg-[#0B222C] hover:bg-[#0F2A36] text-white py-2 text-center text-md rounded-lg w-full mb-3 cursor-pointer"
         >

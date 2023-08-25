@@ -89,12 +89,12 @@ function Posts() {
                   <div className="title text-[#ACACAC] py-2 px-4">
                     {post.post_creator} | {post.community}
                   </div>
-                  <div className="content font-semibold text-lg text-white px-4 pb-2">
-                    {post.title}
-                  </div>
-                  <div className="content text-[#c2c2c2] px-4 pb-4">
-                    {post.description}
-                  </div>
+                <div className="content font-semibold text-lg text-white px-4 pb-2">
+                  {post.title}
+                </div>
+                <div className="content text-[#c2c2c2] px-4 pb-4">
+                  {post.description}
+                </div>
                   {post.image && (
                     <div className="object-contain px-2">
                       <img className="w-full rounded-lg max-h-96" src={`data:image/jpeg;base64,${post.image}`} alt="" />

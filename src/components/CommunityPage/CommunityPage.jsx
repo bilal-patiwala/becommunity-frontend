@@ -80,7 +80,7 @@ function CommunityPage() {
             <HomepageSidebar open={!open} />
           </div>
 
-          <div className={`w-[90%] z-10 bg-[#0F2A36] border-2 border-gray-700 rounded-lg shadow-xl`}>
+          <div className={`w-[90%] z-10 bg-[#0F2A36] rounded-lg shadow-xl`}>
             {loading ? (
               <div class="shadow rounded-md p-2 mx-2 my-1 w-1/5 ">
                 <div class="animate-pulse flex space-x-2">
