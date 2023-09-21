@@ -48,8 +48,6 @@ function CreateCommunity() {
       },
       body: formdata,
     });
-    let responseData = await response.json();
-    console.log(responseData);
     navigate("/");
   };
 

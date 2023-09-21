@@ -65,6 +65,7 @@ function CreatePostModal({ closeModal }) {
     let responseData = await response.json();
     console.log(responseData);
     closeModal();
+    window.location.reload();
   };
 
   const fileUpload = (e) => {
