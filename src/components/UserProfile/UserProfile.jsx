@@ -81,8 +81,8 @@ function UserProfile() {
       },
       body: formdata,
     });
-    let data = await response.json();
-    console.log(data);
+    // let data = await response.json();
+    // console.log(data);
     Navigate("/MyProfile");
   };
 
@@ -105,24 +105,35 @@ function UserProfile() {
           <div className="px-4">
             {updatedImg ? (
               <div className="mb-2 relative">
-              <img
-                className="relative user-profile-img border-2 border-black shadow-xl"
-                height="400px"
-                width="400px"
-                src={updatedImg}
-                alt=""
-              />
+                <img
+                  className="relative user-profile-img border-2 border-black shadow-xl"
+                  height="400px"
+                  width="400px"
+                  src={updatedImg}
+                  alt=""
+                />
 
-              <Tooltip className="transition delay-40 ease-in duration-400 bg-[#0e394b] text-white" title="Choose image" arrow>
-                <div className="absolute left-44 bottom-5 camera-img">
-                  <label htmlFor="file" className="cursor-pointer">
-                    <img src={cameraImg} alt="" />
-                    <input type="file" id="file" name="image" onChange={handleImageUpload} accept="image/*" hidden />
-                  </label>
-                </div>
-              </Tooltip>
-              <br />
-            </div>
+                <Tooltip
+                  className="transition delay-40 ease-in duration-400 bg-[#0e394b] text-white"
+                  title="Choose image"
+                  arrow
+                >
+                  <div className="absolute left-44 bottom-5 camera-img">
+                    <label htmlFor="file" className="cursor-pointer">
+                      <img src={cameraImg} alt="" />
+                      <input
+                        type="file"
+                        id="file"
+                        name="image"
+                        onChange={handleImageUpload}
+                        accept="image/*"
+                        hidden
+                      />
+                    </label>
+                  </div>
+                </Tooltip>
+                <br />
+              </div>
             ) : (
               <div className="mb-2 relative">
                 <img
@@ -133,11 +144,22 @@ function UserProfile() {
                   alt=""
                 />
 
-                <Tooltip className="transition delay-40 ease-in duration-400 bg-[#0e394b] text-white" title="Choose image" arrow>
+                <Tooltip
+                  className="transition delay-40 ease-in duration-400 bg-[#0e394b] text-white"
+                  title="Choose image"
+                  arrow
+                >
                   <div className="absolute left-44 bottom-5 camera-img">
                     <label htmlFor="file" className="cursor-pointer">
                       <img src={cameraImg} alt="" />
-                      <input type="file" id="file" name="image" onChange={handleImageUpload} accept="image/*" hidden />
+                      <input
+                        type="file"
+                        id="file"
+                        name="image"
+                        onChange={handleImageUpload}
+                        accept="image/*"
+                        hidden
+                      />
                     </label>
                   </div>
                 </Tooltip>
@@ -164,9 +186,10 @@ function UserProfile() {
                 <textarea
                   className="mt-2 mb-3 min-h-[60px] p-2 rounded-lg bg-[#0e394b] text-white text-lg"
                   type="text"
-                  value={newBio}
+                  value={newBio !== "null" ? newBio : ""}
                   onChange={handleBioChange}
                 />
+
                 <br />
                 <button
                   onClick={handleEditProfile}
