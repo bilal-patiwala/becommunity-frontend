@@ -47,6 +47,7 @@ export const AuthProvider = ({children}) => {
         let data = await response.json()
         if (response.status === 200){
             setAuthToken(data)
+            console.log(jwt_decode(data.refresh))
             setUser(jwt_decode(data.access))
             localStorage.setItem('authToken', JSON.stringify(data))
             navigate('/')

@@ -139,8 +139,8 @@ function Modal({ closeModal, interestvalues }) {
                               {community.image ? (
                                 <img
                                   className="h-[74px] w-[74px] rounded-full"
-                                  src={`http://127.0.0.1:8000${community.image}`}
-                                  alt=""
+                                  src={`data:image/jpeg;base64,${community.image}`}
+                                  alt="hello"
                                 />
                               ) : (
                                 <img
@@ -194,15 +194,15 @@ function Modal({ closeModal, interestvalues }) {
                 )}{" "}
                 <Link to="/">
                   <div className="w-full bg-[#0F2A36] text-center sticky bottom-0">
-                  <button
-                    id="goto-homepage-btn"
-                    className="m-2 rounded-[12px] bg-[#03C988] hover:bg-[#08a36f]"
-                    type="submit"
-                  >
-                    <div className="px-5 py-2 text-md text-black font-Inter font-semibold">
-                      Next <i className="fa fa-arrow-right ml-1"></i>
-                    </div>
-                  </button>
+                    <button
+                      id="goto-homepage-btn"
+                      className="m-2 rounded-[12px] bg-[#03C988] hover:bg-[#08a36f]"
+                      type="submit"
+                    >
+                      <div className="px-5 py-2 text-md text-black font-Inter font-semibold">
+                        Next <i className="fa fa-arrow-right ml-1"></i>
+                      </div>
+                    </button>
                   </div>
                 </Link>
               </div>
