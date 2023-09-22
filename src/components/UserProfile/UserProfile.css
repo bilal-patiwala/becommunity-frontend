@@ -7,7 +7,10 @@
 .profileBox {
     min-height: 100vh;
 }
-
+.backtohome-btn:hover{
+    opacity: 0.8;
+    transition: 0.3s;
+}
 .camera-img{
     background-color: #03C988;
     border-radius: 50%;

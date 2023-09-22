@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import cameraImg from "../../assets/camera.svg";
+import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 function UserProfile() {
   const [userData, setUserData] = useState([]);
   const Navigate = useNavigate();
@@ -81,13 +83,16 @@ function UserProfile() {
       },
       body: formdata,
     });
-    // let data = await response.json();
-    // console.log(data);
+
     Navigate("/MyProfile");
+    toast.success("Profile updated successfully");
   };
 
   return (
     <div className="profileBox bg-[#0F2A36]">
+      <div>
+        <Toaster position="top-right" />
+      </div>
       {loading ? (
         <div>
           <div className="flex justify-center items-center pt-32">
@@ -191,15 +196,24 @@ function UserProfile() {
                 />
 
                 <br />
-                <button
-                  onClick={handleEditProfile}
-                  className="my-2 rounded-[12px] bg-[#03C988] hover:bg-[#08a36f]"
-                  type="submit"
-                >
-                  <div className="px-4 py-2 text-black font-Inter font-semibold">
-                    Save Changes
-                  </div>
-                </button>
+                <div className="flex flex-start items-center">
+                  <button
+                    onClick={handleEditProfile}
+                    className="my-2 rounded-[12px] bg-[#03C988] hover:bg-[#08a36f]"
+                    type="submit"
+                  >
+                    <div className="px-4 py-2 text-black font-Inter font-semibold">
+                      Save Changes
+                    </div>
+                  </button>
+                  <Link
+                    to="/"
+                  >
+                    <div className="font-Inter ml-6 underline text-white hover:underline backtohome-btn">
+                      Back to Home
+                    </div>
+                  </Link>
+                </div>
               </form>
             </div>
           </div>
