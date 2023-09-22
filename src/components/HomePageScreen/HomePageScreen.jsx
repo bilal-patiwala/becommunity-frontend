@@ -28,11 +28,18 @@ function HomePageScreen() {
   const [isLiked, setIsLiked] = useState(false);
   const [isDisLiked, setIsDisLiked] = useState(false);
   let [recentlyLikedPosts, setRecentlyLikedPosts] = useState([]);
+  let [recentlyDislikedPosts, setRecentlyDislikedPosts] = useState([]);
   const [activeTab, setActiveTab] = useState("");
 
   const handleLike = async (post_id, index) => {
     // e.preventDefault();
     setRecentlyLikedPosts((prevPosts) => [...prevPosts, post_id]);
+    if (recentlyDislikedPosts.includes(post_id)) {
+      setRecentlyDislikedPosts((prevDisLikedPosts) =>
+        prevDisLikedPosts.filter((id) => id !== post_id)
+      );
+      postsData[index].dislikes_count--;
+    }
     postsData[index].likes_count++;
 
     let response = await fetch(`http://localhost:8000/like_post/${post_id}/`, {
@@ -41,17 +48,70 @@ function HomePageScreen() {
         Authorization: `Bearer ${authToken.refresh}`,
       },
     });
-    let data = await response.json();
-    console.log(data);
-  };
-  const handleDislike = (e) => {
-    e.preventDefault();
-    setIsDisLiked(!isDisLiked);
+    // let data = await response.json();
+    // console.log(data);
   };
 
-  useEffect(() => {
-    get_post();
-  }, []);
+  const handleDislike = async (post_id, index) => {
+    setRecentlyDislikedPosts((prevDislikedPosts) => [
+      ...prevDislikedPosts,
+      post_id,
+    ]);
+    if (recentlyLikedPosts.includes(post_id)) {
+      setRecentlyLikedPosts((prevLikedPosts) =>
+        prevLikedPosts.filter((id) => id !== post_id)
+      );
+      postsData[index].likes_count--;
+    }
+    postsData[index].dislikes_count++;
+    let response = await fetch(
+      `http://localhost:8000/dislike_post/${post_id}/`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${authToken.refresh}`,
+        },
+      }
+    );
+    // let data = await response.json();
+    // console.log(data);
+  };
+
+  const handleAlreadyLike = async (post_id, index) => {
+    // e.preventDefault();
+    setRecentlyLikedPosts((prevLikedPosts) =>
+      prevLikedPosts.filter((id) => id !== post_id)
+    );
+
+    postsData[index].likes_count--;
+
+    let response = await fetch(`http://localhost:8000/like_post/${post_id}/`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${authToken.refresh}`,
+      },
+    });
+    // let data = await response.json();
+    // console.log(data);
+  };
+
+  const handleAlreadyDislike = async (post_id, index) => {
+    setRecentlyDislikedPosts((prevDisLikedPosts) =>
+      prevDisLikedPosts.filter((id) => id !== post_id)
+    );
+    postsData[index].dislikes_count--;
+    let response = await fetch(
+      `http://localhost:8000/dislike_post/${post_id}/`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${authToken.refresh}`,
+        },
+      }
+    );
+    // let data = await response.json();
+    // console.log(data);
+  };
 
   const get_post = async () => {
     setPostLoading(true);
@@ -68,11 +128,12 @@ function HomePageScreen() {
 
     setPostLoading(false);
   };
-
+  useEffect(() => {
+    get_post();
+  }, []);
 
   const sortByDate = (a, b) => new Date(b.date) - new Date(a.date);
   const sortByLikes = (a, b) => b.likes_count - a.likes_count;
-
 
   const handleSortByDate = () => {
     const sortedPosts = [...postsData].sort(sortByDate);
@@ -84,18 +145,15 @@ function HomePageScreen() {
     setPostsData(sortedPosts);
   };
 
-  useEffect(()=>{
-    if(activeTab=="top"){
+  useEffect(() => {
+    if (activeTab == "top") {
       handleSortByLikes();
-    }
-    else if(activeTab=="new"){
+    } else if (activeTab == "new") {
       handleSortByDate();
-    }
-    else{
+    } else {
       get_post();
     }
-  },[activeTab])
-
+  }, [activeTab]);
 
   const post = (e) => {
     e.preventDefault();
@@ -120,12 +178,17 @@ function HomePageScreen() {
           className="w-full flex bg-[#0F2A36]"
         >
           <div>
-            <HomepageSidebar activeTab={activeTab} setActiveTab={setActiveTab}  open={open} />
+            <HomepageSidebar
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              open={open}
+            />
           </div>
 
           <div
-            className={`${open ? "w-3/5" : "w-4/5"
-              } flex flex-col items-center z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
+            className={`${
+              open ? "w-3/5" : "w-4/5"
+            } flex flex-col items-center z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
           >
             <div className="w-full flex justify-end items-center">
               <Tooltip
@@ -154,7 +217,6 @@ function HomePageScreen() {
                 <PageLoader />
                 <PageLoader />
                 <PageLoader />
-
               </>
             ) : (
               <div className="flex flex-col w-full justify-center items-center">
@@ -182,11 +244,13 @@ function HomePageScreen() {
                         />
                       </div>
                     )}
-                      <div className="text-white font-Inter flex items-center flex-row mt-3">
-                        <div className="px-4 flex flex-start">
-                          {post.has_liked ||
-                          recentlyLikedPosts.includes(post.id) ? (
-                          <button onClick={() => handleLike(post.id, index)}>
+                    <div className="text-white font-Inter flex items-center flex-row mt-3">
+                      <div className="px-4 flex flex-start">
+                        {post.has_liked ||
+                        recentlyLikedPosts.includes(post.id) ? (
+                          <button
+                            onClick={() => handleAlreadyLike(post.id, index)}
+                          >
                             <img
                               src={thumbsUpFilled}
                               style={{ fill: "#fff" }}
@@ -195,13 +259,13 @@ function HomePageScreen() {
                           </button>
                         ) : (
                           <Tooltip
-                          className="transition delay-40 ease-in duration-400 text-black"
-                          title="Like"
-                          arrow
-                        >
-                          <button onClick={() => handleLike(post.id, index)}>
-                            <img src={thumbsUp} alt="" />
-                          </button>
+                            className="transition delay-40 ease-in duration-400 text-black"
+                            title="Like"
+                            arrow
+                          >
+                            <button onClick={() => handleLike(post.id, index)}>
+                              <img src={thumbsUp} alt="" />
+                            </button>
                           </Tooltip>
                         )}
                         <div className="pt-[4px]">
@@ -211,8 +275,11 @@ function HomePageScreen() {
                         </div>
                       </div>
                       <div className="px-2 flex flex-start">
-                        {post.has_disliked ? (
-                          <button onClick={handleDislike}>
+                        {post.has_disliked ||
+                        recentlyDislikedPosts.includes(post.id) ? (
+                          <button
+                            onClick={() => handleAlreadyDislike(post.id, index)}
+                          >
                             <img
                               src={thumbsDownFilled}
                               style={{ color: "#fff" }}
@@ -221,17 +288,19 @@ function HomePageScreen() {
                           </button>
                         ) : (
                           <Tooltip
-                          className="transition delay-40 ease-in duration-400 text-black"
-                          title="Dislike"
-                          arrow
-                        >
-                          <button onClick={handleDislike}>
-                            <img
-                              src={thumbsDown}
-                              style={{ color: "#fff" }}
-                              alt=""
-                            />
-                          </button>
+                            className="transition delay-40 ease-in duration-400 text-black"
+                            title="Dislike"
+                            arrow
+                          >
+                            <button
+                              onClick={() => handleDislike(post.id, index)}
+                            >
+                              <img
+                                src={thumbsDown}
+                                style={{ color: "#fff" }}
+                                alt=""
+                              />
+                            </button>
                           </Tooltip>
                         )}
                         <div className="pt-[4px]">
@@ -241,15 +310,21 @@ function HomePageScreen() {
                         </div>
                       </div>
                       <Tooltip
-                          className="transition delay-40 ease-in duration-400 text-black"
-                          title="Comment"
-                          arrow
+                        className="transition delay-40 ease-in duration-400 text-black"
+                        title="Comments"
+                        arrow
+                      >
+                        <Link
+                          style={{ textDecoration: "none" }}
+                          to={`/post/${post.id}`}
                         >
-                      <Link style={{ textDecoration: "none" }} to={`/post/${post.id}`}>
-                        <div className="px-6">
-                          <FaRegComments size={26} style={{ fill: "white" }} />
-                        </div>
-                      </Link>
+                          <div className="px-6">
+                            <FaRegComments
+                              size={26}
+                              style={{ fill: "white" }}
+                            />
+                          </div>
+                        </Link>
                       </Tooltip>
                     </div>
                   </div>
