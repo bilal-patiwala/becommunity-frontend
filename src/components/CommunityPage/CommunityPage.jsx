@@ -20,10 +20,11 @@ function CommunityPage() {
   const [communityInfo, setCommunityInfo] = useState([]);
   const { authToken } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-  const [communityId, setCommunityId] = useState('');
-
+  const [communityId, setCommunityId] = useState("");
+  const [joinedCommunityList, setJoinedCommunityList] = useState([]);
+  const [joined, setJoined] = useState(false);
   useEffect(() => {
-    const storedId = localStorage.getItem('communityId');
+    const storedId = localStorage.getItem("communityId");
     if (storedId) {
       setCommunityId(storedId);
     }
@@ -42,8 +43,36 @@ function CommunityPage() {
     let data = await response.json();
     console.log(data);
     setCommunityInfo(data.community);
+    const isCommunityJoined = joinedCommunityList.some(
+      (community) => community.id == communityId
+    );
+    if (isCommunityJoined) {
+      setJoined(true);
+    } else {
+      setJoined(false);
+    }
     setLoading(false);
   };
+
+  const get_joined_communityList = async () => {
+    let response = await fetch(
+      "http://127.0.0.1:8000/get_user_joined_community/",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken.refresh}`,
+        },
+      }
+    );
+    let data = await response.json();
+    console.log("communities joined", data);
+    setJoinedCommunityList(data);
+  };
+
+  useEffect(() => {
+    get_joined_communityList();
+  }, []);
 
   useEffect(() => {
     get_community_info();
@@ -57,7 +86,7 @@ function CommunityPage() {
   const createPost = (e) => {
     e.preventDefault();
     setPostBtn(true);
-  }
+  };
 
   const handleModalClose = () => {
     setPostBtn(false);
@@ -66,7 +95,6 @@ function CommunityPage() {
 
   return (
     <>
-
       {postBtn && <CreateCommunityPostModal closeModal={handleModalClose} />}
 
       <div className="bg-[#0F2A36]">
@@ -96,17 +124,26 @@ function CommunityPage() {
                 </div>
               </div>
             ) : (
-              <div className="border-[#304953] border-b-2 font-Inter text-white flex flex-row">
-                <div className="mt-2 mb-2 mx-3">
-                  <img
-                    src={`data:image/jpeg;base64,${communityInfo.image}`}
-                    className="community-header-image"
-                    alt=""
-                  />
+              <div className="flex justify-between border-[#304953] border-b-2">
+                <div className=" font-Inter text-white flex flex-row">
+                  <div className="mt-2 mb-2 mx-3">
+                    <img
+                      src={`data:image/jpeg;base64,${communityInfo.image}`}
+                      className="community-header-image"
+                      alt=""
+                    />
+                  </div>
+                  <div className="my-[15px] text-lg font-semibold">
+                    {communityInfo.name}
+                  </div>
                 </div>
-                <div className="my-[15px] text-lg font-semibold">
-                  {communityInfo.name}
-                </div>
+                {!joined ? (
+                  <button className="text-white flex justify-center items-center font-Inter font-medium  mx-6">
+                    <div className="px-4 py-[4px] rounded-[18px] bg-green-600 hover:bg-green-700">
+                      Join
+                    </div>
+                  </button>
+                ) : null}
               </div>
             )}
 
