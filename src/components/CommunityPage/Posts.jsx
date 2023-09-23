@@ -43,6 +43,18 @@ function Posts() {
     console.log(data.posts);
     const sortedPosts = data.posts.sort((a, b) => b.date.localeCompare(a.date));
     setCommunityPosts(sortedPosts);
+    const likedPosts = [];
+    const dislikedPosts = [];
+
+    sortedPosts.forEach((post) => {
+      if (post.has_liked) {
+        likedPosts.push(post.id);
+      } else if (post.has_disliked) {
+        dislikedPosts.push(post.id);
+      }
+    });
+    setRecentlyLikedPosts(likedPosts);
+    setRecentlyDislikedPosts(dislikedPosts);
     setLoading(false);
   };
 
@@ -169,8 +181,7 @@ function Posts() {
                   )}
                   <div className="text-white font-Inter flex items-center flex-row mt-3">
                     <div className="px-4 flex flex-start">
-                      {post.has_liked ||
-                      recentlyLikedPosts.includes(post.id) ? (
+                      {recentlyLikedPosts.includes(post.id) ? (
                         <button
                           onClick={() => handleAlreadyLike(post.id, index)}
                         >
@@ -198,8 +209,7 @@ function Posts() {
                       </div>
                     </div>
                     <div className="px-2 flex flex-start">
-                      {post.has_disliked ||
-                      recentlyDislikedPosts.includes(post.id) ? (
+                      {recentlyDislikedPosts.includes(post.id) ? (
                         <button
                           onClick={() => handleAlreadyDislike(post.id, index)}
                         >
