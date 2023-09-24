@@ -7,7 +7,7 @@ import thumbsUp from "../../assets/thumbs-up.svg";
 import thumbsDown from "../../assets/thumbs-down.svg";
 import thumbsUpFilled from "../../assets/thumbs-up-filled.svg";
 import thumbsDownFilled from "../../assets/thumbs-down-filled.svg";
-
+import "./PostPage.css";
 // Samanuay -> review this whole code because I have put some things to make it work which are commented out and some are not so dekh lena
 
 // const Comment = ({ comment }) => {
@@ -65,13 +65,19 @@ function PostPage() {
   const [post, setPostData] = useState({});
   const [postLoading, setPostLoading] = useState(false);
   const [commentsData, setCommentsData] = useState([]);
-  let [recentlyLikedPosts, setRecentlyLikedPosts] = useState([]);
+  let [recentlyLikedPosts, setRecentlyLikedPosts] = useState(false);
+  let [recentlyDislikedPosts, setRecentlyDislikedPosts] = useState(false);
   const { authToken } = useContext(AuthContext);
   const { id } = useParams();
-  const handleLike = async (post_id, index) => {
+  const [comment, setComment] = useState("");
+  const handleLike = async (post_id) => {
     // e.preventDefault();
-    setRecentlyLikedPosts((prevPosts) => [...prevPosts, post_id]);
-    postsData[index].likes_count++;
+    setRecentlyLikedPosts(true);
+    if (recentlyDislikedPosts) {
+      setRecentlyDislikedPosts(false);
+      post.dislikes_count--;
+    }
+    post.likes_count++;
 
     let response = await fetch(`http://localhost:8000/like_post/${post_id}/`, {
       method: "POST",
@@ -82,9 +88,55 @@ function PostPage() {
     let data = await response.json();
     console.log(data);
   };
-  const handleDislike = (e) => {
-    e.preventDefault();
-    setIsDisLiked(!isDisLiked);
+
+  const handleAlreadyLike = async (post_id) => {
+    setRecentlyLikedPosts(false);
+    post.likes_count--;
+    let response = await fetch(`http://localhost:8000/like_post/${post_id}/`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${authToken.refresh}`,
+      },
+    });
+    let data = await response.json();
+    console.log(data);
+  };
+
+  const handleDislike = async (post_id) => {
+    setRecentlyDislikedPosts(true);
+    if (recentlyLikedPosts) {
+      setRecentlyLikedPosts(false);
+      post.likes_count--;
+    }
+    post.dislikes_count++;
+
+    let response = await fetch(
+      `http://localhost:8000/dislike_post/${post_id}/`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${authToken.refresh}`,
+        },
+      }
+    );
+    let data = await response.json();
+    console.log(data);
+  };
+
+  const handleAlreadyDislike = async (post_id) => {
+    setRecentlyDislikedPosts(false);
+    post.dislikes_count--;
+    let response = await fetch(
+      `http://localhost:8000/dislike_post/${post_id}/`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${authToken.refresh}`,
+        },
+      }
+    );
+    let data = await response.json();
+    console.log(data);
   };
   const get_post_data = async () => {
     console.log(id);
@@ -115,13 +167,31 @@ function PostPage() {
     setCommentsData(data);
   };
 
+  const handleCommentSubmit = async () => {
+    let response = await fetch(
+      `http://localhost:8000/make_comment/${post.id}/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken.refresh}`,
+        },
+        body: JSON.stringify({ content: comment }),
+      }
+    );
+    let data = await response.json();
+    console.log(data);
+    load_comments();
+
+    setComment("");
+  };
   useEffect(() => {
     get_post_data();
     load_comments();
   }, []);
 
   return (
-    <div className="bg-[#0F2A36]">
+    <div className="bg-[#0F2A36] h-full">
       {postLoading ? (
         <div className="flex justify-center items-center pt-8">
           <LoadingSpinner height="60px" width="60px" />
@@ -143,18 +213,22 @@ function PostPage() {
               {post.description}
             </div>
             {post.image && (
-              <div>
-                <img src={`data:image/jpeg;base64,${post.image}`} alt="" />
+              <div className="object-contain px-2">
+                <img
+                  className="w-full rounded-lg max-h-96"
+                  src={`data:image/jpeg;base64,${post.image}`}
+                  alt=""
+                />
               </div>
             )}
             <div className="text-white font-Inter flex items-center flex-row mt-3">
               <div className="px-4 flex flex-start">
-                {post.has_liked || recentlyLikedPosts.includes(post.id) ? (
-                  <button onClick={() => handleLike(post.id, index)}>
+                {post.has_liked || recentlyLikedPosts ? (
+                  <button onClick={() => handleAlreadyLike(post.id)}>
                     <img src={thumbsUpFilled} style={{ fill: "#fff" }} alt="" />
                   </button>
                 ) : (
-                  <button onClick={() => handleLike(post.id, index)}>
+                  <button onClick={() => handleLike(post.id)}>
                     <img src={thumbsUp} alt="" />
                   </button>
                 )}
@@ -165,8 +239,8 @@ function PostPage() {
                 </div>
               </div>
               <div className="px-2 flex flex-start">
-                {post.has_disliked ? (
-                  <button onClick={handleDislike}>
+                {post.has_disliked || recentlyDislikedPosts ? (
+                  <button onClick={() => handleAlreadyDislike(post.id)}>
                     <img
                       src={thumbsDownFilled}
                       style={{ color: "#fff" }}
@@ -174,7 +248,7 @@ function PostPage() {
                     />
                   </button>
                 ) : (
-                  <button onClick={handleDislike}>
+                  <button onClick={() => handleDislike(post.id)}>
                     <img src={thumbsDown} style={{ color: "#fff" }} alt="" />
                   </button>
                 )}
@@ -186,15 +260,45 @@ function PostPage() {
               </div>
             </div>
           </div>
+          <div className="font-Inter w-4/5 md:w-2/5 rounded-lg bg-[#0B222C] py-3 my-2 post-div">
+            <div className="comment-input flex justify-between items-center">
+              <input
+                onChange={(e) => setComment(e.target.value)}
+                className="text-white bg-[#0F2A36] h-[36px] w-full ml-5 px-2 my-2 rounded-[8px] comment-box-input text-md"
+                type="text"
+                value={comment}
+                placeholder="Type Comment..."
+              />
+              <button
+                onClick={handleCommentSubmit}
+                className="text-white bg-green-600 hover:bg-green-700 px-2 mx-2 h-[36px] rounded-[10px]"
+              >
+                Post
+              </button>
+            </div>
+            <div>
+              <div className="font-Inter px-4 py-2">
+                {commentsData.map((comment, index) => (
+                  <div>
+                    {index !== 0 && <hr className="text-white" />}
+                    <div className="text-[#ACACAC]">{comment.author}</div>
+                    <div className="text-white text-lg font-medium">
+                      {comment.content}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
-      {commentsData.map((comment) => (
+      {/* {commentsData.map((comment) => (
         <Comment key={comment.id} comment={comment} />
-        ))}
+      ))} */}
 
       {/* Samanuay ->  below code is for mapping only parent comments try if you want to see */}
- 
+
       {/* <div className="flex flex-col w-full justify-center items-center">
         <div className="font-Inter text-white w-4/5 md:w-2/5 rounded-lg bg-[#0B222C] py-2 my-2 post-div">
           <div>
