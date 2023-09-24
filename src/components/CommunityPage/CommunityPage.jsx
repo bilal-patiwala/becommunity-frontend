@@ -23,6 +23,9 @@ function CommunityPage() {
   const [communityId, setCommunityId] = useState("");
   const [joinedCommunityList, setJoinedCommunityList] = useState([]);
   const [joined, setJoined] = useState(false);
+  const [communityJoinLoading, setCommunityJoinLoading] = useState(false);
+  const { csrftoken } = useContext(AuthContext);
+  const [recentlyJoined, setRecentlyJoined] = useState(false);
   useEffect(() => {
     const storedId = localStorage.getItem("communityId");
     if (storedId) {
@@ -43,14 +46,7 @@ function CommunityPage() {
     let data = await response.json();
     console.log(data);
     setCommunityInfo(data.community);
-    const isCommunityJoined = joinedCommunityList.some(
-      (community) => community.id == communityId
-    );
-    if (isCommunityJoined) {
-      setJoined(true);
-    } else {
-      setJoined(false);
-    }
+
     setLoading(false);
   };
 
@@ -78,6 +74,18 @@ function CommunityPage() {
     get_community_info();
   }, [communityId]);
 
+  useEffect(() => {
+    const isCommunityJoined = joinedCommunityList.some(
+      (community) => community.id == communityId
+    );
+    if (isCommunityJoined) {
+      setJoined(true);
+    } else {
+      setJoined(false);
+    }
+  }, [joinedCommunityList, communityId]);
+  
+
   const [activeLink, setActiveLink] = useState("posts");
   const handleNavLinkClick = (link) => {
     setActiveLink(link);
@@ -91,6 +99,27 @@ function CommunityPage() {
   const handleModalClose = () => {
     setPostBtn(false);
     get_post();
+  };
+
+  const handleCommunityJoin = async () => {
+    setCommunityJoinLoading(true);
+    const commid = parseInt(communityId, 10);
+    let response = await fetch("http://127.0.0.1:8000/join/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken.refresh}`,
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({ data: [commid] }),
+    });
+
+    let data = await response.json();
+    if (data.status === 201) {
+      setRecentlyJoined(true);
+    }
+    setCommunityJoinLoading(false);
+    window.location.reload();
   };
 
   return (
@@ -138,10 +167,26 @@ function CommunityPage() {
                   </div>
                 </div>
                 {!joined ? (
-                  <button className="text-white flex justify-center items-center font-Inter font-medium  mx-6">
-                    <div className="px-4 py-[4px] rounded-[18px] bg-green-600 hover:bg-green-700">
-                      Join
-                    </div>
+                  <button
+                    onClick={handleCommunityJoin}
+                    className="text-white flex justify-center items-center font-Inter font-medium  mx-6"
+                  >
+                    {!recentlyJoined ? (
+                      <div className="px-4 py-[4px] rounded-[18px] bg-green-600 hover:bg-green-700">
+                        {communityJoinLoading ? (
+                          <div>
+                            {" "}
+                            <LoadingSpinner height="12px" width="12px" />
+                          </div>
+                        ) : (
+                          <div>Join</div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="px-4 py-[4px] rounded-[18px] border border-white">
+                        <div>Joined</div>
+                      </div>
+                    )}
                   </button>
                 ) : null}
               </div>
@@ -195,15 +240,17 @@ function CommunityPage() {
             </div>
 
             <div className="w-full flex justify-end items-center">
-              <div className="font-Inter z-30 fixed bottom-7 rounded-full shadow-xl bg-green-600 py-2 mr-4">
-                <button
-                  onClick={createPost}
-                  className="flex flex-row items-center text-md font-black text-white font-bold text-center p-2"
-                >
-                  <i class="fa-regular fa-pen-to-square fa-fade fa-lg text-white m-1"></i>
-                  <span className="mx-1">Create Post</span>
-                </button>
-              </div>
+              {joined ? (
+                <div className="font-Inter z-30 fixed bottom-7 rounded-full shadow-xl bg-green-600 py-2 mr-4">
+                  <button
+                    onClick={createPost}
+                    className="flex flex-row items-center text-md font-black text-white font-bold text-center p-2"
+                  >
+                    <i class="fa-regular fa-pen-to-square fa-fade fa-lg text-white m-1"></i>
+                    <span className="mx-1">Create Post</span>
+                  </button>
+                </div>
+              ) : null}
             </div>
 
             <div className="w-full z-20 fixed bottom-0 h-9 bg-[#0F2A36]"></div>
