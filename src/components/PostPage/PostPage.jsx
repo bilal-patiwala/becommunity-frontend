@@ -151,6 +151,12 @@ function PostPage() {
     let data = await response.json();
     console.log("posts", data);
     setPostData(data);
+    if (data.has_liked) {
+      setRecentlyLikedPosts(true);
+    }
+    if (data.has_disliked) {
+      setRecentlyDislikedPosts(true);
+    }
     setPostLoading(false);
   };
 
@@ -191,7 +197,7 @@ function PostPage() {
   }, []);
 
   return (
-    <div className="bg-[#0F2A36] h-full">
+    <div className="bg-[#0F2A36]">
       {postLoading ? (
         <div className="flex justify-center items-center pt-8">
           <LoadingSpinner height="60px" width="60px" />

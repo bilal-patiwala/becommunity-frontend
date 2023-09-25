@@ -10,7 +10,7 @@ import thumbsDown from "../../assets/thumbs-down.svg";
 import thumbsUpFilled from "../../assets/thumbs-up-filled.svg";
 import thumbsDownFilled from "../../assets/thumbs-down-filled.svg";
 
-function Posts() {
+function Posts({open}) {
   // const location = useLocation();
   // const community_id = location.state.id;
   const [communityPosts, setCommunityPosts] = useState([]);
@@ -155,7 +155,9 @@ function Posts() {
       ) : (
         <div className="text-white flex justify-center">
           <div
-            className={`flex flex-col items-center z-10 p-2 bg-[#0F2A36] rounded-lg pt-2`}
+            className={`${
+              open ? "w-4/5" : "w-4/5"
+            } flex flex-col items-center z-10 p-2 bg-[#0F2A36] rounded-lg pt-5`}
           >
             <div className="flex flex-col w-full justify-center items-center">
               {" "}

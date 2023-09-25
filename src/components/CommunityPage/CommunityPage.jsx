@@ -121,6 +121,7 @@ function CommunityPage() {
     setCommunityJoinLoading(false);
     window.location.reload();
   };
+  
 
   return (
     <>
@@ -256,7 +257,7 @@ function CommunityPage() {
             <div className="w-full z-20 fixed bottom-0 h-9 bg-[#0F2A36]"></div>
 
             <div className="mt-3">
-              {activeLink === "posts" ? <Posts /> : <Chats />}
+              {activeLink === "posts" ? <Posts open={open} /> : <Chats />}
             </div>
           </div>
           <HomepageRightSidebar />
