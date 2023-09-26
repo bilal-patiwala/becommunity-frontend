@@ -1,6 +1,5 @@
 import React from 'react'
-import { NavLink,Link } from 'react-router-dom'
-import { useNavigate } from "react-router-dom";
+import { useNavigate,NavLink,Link } from 'react-router-dom'
 import "./Dropdown.css";
 
 function Dropdown() {
@@ -15,7 +14,7 @@ function Dropdown() {
       localStorage.removeItem('authToken');
 
       if (localStorage.getItem('authToken') == null) {
-        window.location.reload(false);
+        // window.location.reload(false);
         Navigate("/");
       }
       else {
