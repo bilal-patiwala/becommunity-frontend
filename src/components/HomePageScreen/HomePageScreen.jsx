@@ -34,7 +34,9 @@ function HomePageScreen() {
   const handleLike = async (post_id, index) => {
     // e.preventDefault();
     setRecentlyLikedPosts((prevPosts) => [...prevPosts, post_id]);
-    if (recentlyDislikedPosts.includes(post_id)) {
+    if (
+      recentlyDislikedPosts.includes(post_id)
+    ) {
       setRecentlyDislikedPosts((prevDisLikedPosts) =>
         prevDisLikedPosts.filter((id) => id !== post_id)
       );
@@ -123,11 +125,23 @@ function HomePageScreen() {
       },
     });
     let data = await response.json();
-    console.log("posts", data);
-    setPostsData(data);
+    setPostsData(data)
+    const likedPosts = [];
+    const dislikedPosts = [];
+
+    data.forEach((post) => {
+      if (post.has_liked) {
+        likedPosts.push(post.id);
+      } else if (post.has_disliked) {
+        dislikedPosts.push(post.id);
+      }
+    });
+    setRecentlyLikedPosts(likedPosts);
+    setRecentlyDislikedPosts(dislikedPosts);
 
     setPostLoading(false);
   };
+
   useEffect(() => {
     get_post();
   }, []);
@@ -246,8 +260,7 @@ function HomePageScreen() {
                     )}
                     <div className="text-white font-Inter flex items-center flex-row mt-3">
                       <div className="px-4 flex flex-start">
-                        {post.has_liked ||
-                        recentlyLikedPosts.includes(post.id) ? (
+                        {recentlyLikedPosts.includes(post.id) ? (
                           <button
                             onClick={() => handleAlreadyLike(post.id, index)}
                           >
@@ -275,8 +288,7 @@ function HomePageScreen() {
                         </div>
                       </div>
                       <div className="px-2 flex flex-start">
-                        {post.has_disliked ||
-                        recentlyDislikedPosts.includes(post.id) ? (
+                        {recentlyDislikedPosts.includes(post.id) ? (
                           <button
                             onClick={() => handleAlreadyDislike(post.id, index)}
                           >
