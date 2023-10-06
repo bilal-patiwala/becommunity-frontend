@@ -187,7 +187,7 @@ function HomepageSidebar({ open, activeTab, setActiveTab }) {
                       <img
                         className="community-image"
                         src={`data:image/jpeg;base64,${community.image}`}
-                        alt=""
+                        alt="community-image"
                       />
                     </div>
                     <div style={{ display: open ? "block" : "none" }}>
