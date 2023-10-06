@@ -26,6 +26,7 @@ function SigninScreen() {
     if (data.username !== "" && data.password !== "" && data.email !== "" && data.name !== "") {
       setLoading(true);
       let response = await signupUser(data.email, data.username, data.name, data.password);
+      console.log("sign in response",response);
       setLoading(false);
     }
   };
