@@ -177,7 +177,7 @@ function CommunityPage() {
                         {communityJoinLoading ? (
                           <div>
                             {" "}
-                            <LoadingSpinner height="12px" width="12px" />
+                            <LoadingSpinner height="14px" width="14px" />
                           </div>
                         ) : (
                           <div>Join</div>
