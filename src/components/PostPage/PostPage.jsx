@@ -197,9 +197,9 @@ function PostPage() {
   }, []);
 
   return (
-    <div className="bg-[#0F2A36]">
+    <div className="postpage bg-[#0F2A36]">
       {postLoading ? (
-        <div className="flex justify-center items-center pt-8">
+        <div className="flex justify-center items-center pb-32 h-screen">
           <LoadingSpinner height="60px" width="60px" />
         </div>
       ) : (

@@ -153,11 +153,11 @@ function Modal({ closeModal, interestvalues }) {
                       <div className="flex flex-wrap flex-row mx-4">
                         {communityList.map((community, index) => (
                           <div
-                            className="flex flex-col justify-center mb-4 mx-2 w-[134px] bg-[#0A1C24] p-2 rounded-[12px]"
+                            className="flex flex-col mb-4 mx-2 w-[134px] h-fit bg-[#0A1C24] p-2 rounded-[12px]"
                             key={community.id}
                           >
-                            <div className="">
-                              <div className="mt-2">
+                            <div className="h-fit">
+                              <div className="flex justify-end items-center">
                                 <form>
                                   <input
                                     type="checkbox"
