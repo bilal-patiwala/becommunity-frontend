@@ -14,7 +14,7 @@ function Dropdown() {
       localStorage.removeItem('authToken');
 
       if (localStorage.getItem('authToken') == null) {
-        // window.location.reload(false);
+        window.location.reload(false);
         Navigate("/");
       }
       else {

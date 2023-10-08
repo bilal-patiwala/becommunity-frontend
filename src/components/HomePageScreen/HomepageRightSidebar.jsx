@@ -117,7 +117,8 @@ function HomepageRightSidebar() {
             {" "}
             {userData.username}{" "}
           </div>
-          <div className="text-[#bbbbbb] p-2 text-lg"> {userData.bio} </div>
+          {userData.bio ?(<div className="text-[#bbbbbb] p-2 text-lg"> {userData.bio} </div>):null}
+          
 
           <div className="text-[#ACACAC] text-lg px-2">
             {" "}

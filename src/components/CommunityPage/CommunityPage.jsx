@@ -8,8 +8,8 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import CreateCommunityPostModal from "../CreatePost/CreateCommunityPostModal";
 import HomepageNavbar from "../HomePageScreen/HomepageNavbar";
 import HomepageSidebar from "../HomePageScreen/HomepageSidebar";
-import HomepageRightSidebar from "../HomePageScreen/HomepageRightSidebar";
 import communityTestImg from "../../../public/infoImage3.jpg";
+import CommunityRightSideBar from "./CommunityRightSideBar";
 import { NavLink, Route } from "react-router-dom";
 import Posts from "./Posts";
 import Chats from "./Chats";
@@ -138,7 +138,7 @@ function CommunityPage() {
             <HomepageSidebar open={!open} />
           </div>
 
-          <div className={`w-[90%] z-10 bg-[#0F2A36] rounded-lg shadow-xl`}>
+          <div className={`w-[75%] z-10 bg-[#0F2A36] rounded-lg `}>
             {loading ? (
               <div class="shadow rounded-md p-2 mx-2 my-1 w-1/5 ">
                 <div class="animate-pulse flex space-x-2">
@@ -241,7 +241,7 @@ function CommunityPage() {
             </div>
 
             <div className="w-full flex justify-end items-center">
-              {joined ? (
+              {joined && activeLink === "posts" ? (
                 <div className="font-Inter z-30 fixed bottom-7 rounded-full shadow-xl bg-green-600 py-2 mr-4">
                   <button
                     onClick={createPost}
@@ -260,7 +260,7 @@ function CommunityPage() {
               {activeLink === "posts" ? <Posts open={open} /> : <Chats />}
             </div>
           </div>
-          <HomepageRightSidebar />
+          <CommunityRightSideBar />
         </div>
       </div>
     </>
