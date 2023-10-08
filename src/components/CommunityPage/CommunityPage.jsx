@@ -91,7 +91,7 @@ function CommunityPage() {
   const [activeLink, setActiveLink] = useState("posts");
   const handleNavLinkClick = (link) => {
     setActiveLink(link);
-    getRoom(communityInfo.name)
+    getRoom(communityInfo.id)
     console.log(communityInfo.name);
   };
 
@@ -245,7 +245,7 @@ function CommunityPage() {
             </div>
 
             <div className="w-full flex justify-end items-center">
-              {joined ? (
+              {joined && activeLink === "posts" ? (
                 <div className="font-Inter z-30 fixed bottom-7 rounded-full shadow-xl bg-green-600 py-2 mr-4">
                   <button
                     onClick={createPost}
@@ -258,7 +258,7 @@ function CommunityPage() {
               ) : null}
             </div>
 
-            <div className="w-full z-20 fixed bottom-0 h-9 bg-[#0F2A36]"></div>
+            {/* <div className="w-full z-20 fixed bottom-0 h-9 bg-[#0F2A36]"></div> */}
             
             <div className="mt-3">
               {activeLink === "posts" ? <Posts open={open} /> : <Chats />}
